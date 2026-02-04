@@ -60,7 +60,11 @@ export class BaseComponent implements OnInit {
     this.level = level;
     this.cdr.detectChanges();
   }
-  
+
+  onPlayerChanged(): void {
+    // Цей метод викликається при виході з акаунту
+    // Логіка вже виконана в header компоненті (очищення токену та перенаправлення)
+  }
 }
 
 

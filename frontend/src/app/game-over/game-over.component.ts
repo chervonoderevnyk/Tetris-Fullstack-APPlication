@@ -1,25 +1,63 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ScoreService } from '../services/score.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game-over',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './game-over.component.html',
   styleUrls: ['./game-over.component.scss']
 })
 export class GameOverComponent {
   finalScore: number = 0;
   finalLevel: number = 1;
+  scoreSaved: boolean = false;
+  saveError: string | null = null;
+  saving: boolean = false;
 
-  constructor(private route: ActivatedRoute,  private router: Router) {
+  constructor(
+    private route: ActivatedRoute,  
+    private router: Router,
+    private scoreService: ScoreService
+  ) {
     this.route.queryParams.subscribe(params => {
       this.finalScore = +params['score'] || 0;
       this.finalLevel = +params['level'] || 1;
+      
+      // Автоматично зберігаємо результат при завантаженні компонента
+      this.saveScore();
     });
+  }
+
+  saveScore(): void {
+    if (this.finalScore > 0 && !this.scoreSaved && !this.saving) {
+      this.saving = true;
+      this.scoreService.saveScore(this.finalScore, this.finalLevel).subscribe({
+        next: (result) => {
+          this.scoreSaved = true;
+          this.saving = false;
+          console.log('Результат збережено:', result);
+        },
+        error: (error) => {
+          this.saving = false;
+          if (error.status === 401) {
+            this.saveError = 'Потрібно увійти в систему для збереження результату';
+          } else {
+            this.saveError = 'Помилка збереження результату';
+          }
+          console.error('Помилка збереження результату:', error);
+        }
+      });
+    }
   }
 
   restartGame(): void {
     this.router.navigate(['/base']);  // Перезапуск гри
+  }
+
+  viewLeaderboard(): void {
+    this.router.navigate(['/leaderboard']);  // Перехід до лідерборду
   }
 }

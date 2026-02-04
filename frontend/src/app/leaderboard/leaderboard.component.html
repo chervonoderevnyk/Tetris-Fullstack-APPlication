@@ -1,0 +1,79 @@
+<div class="leaderboard-container">
+  <div class="header">
+    <h1>🏆 Таблиця лідерів</h1>
+    <button class="back-button" (click)="goBack()">← Назад до гри</button>
+  </div>
+
+  <!-- Статистика користувача -->
+  <div class="user-stats" *ngIf="userStats">
+    <h2>📊 Ваша статистика</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-label">🎮 Загалом ігор:</span>
+        <span class="stat-value">{{ userStats.totalGames }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">🏆 Найкращий результат:</span>
+        <span class="stat-value">{{ userStats.bestScore }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">📈 Максимальний рівень:</span>
+        <span class="stat-value">{{ userStats.maxLevel }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">📊 Середній бал:</span>
+        <span class="stat-value">{{ userStats.averageScore }}</span>
+      </div>
+    </div>
+    
+    <div class="ranking" *ngIf="userRanking">
+      <h3>🎯 Ваше місце в рейтингу: {{ userRanking.position }}</h3>
+    </div>
+  </div>
+
+  <!-- Лідерборд -->
+  <div class="leaderboard-table">
+    <h2>🥇 Топ гравців</h2>
+    
+    <div class="loading" *ngIf="loading">
+      <p>⏳ Завантаження...</p>
+    </div>
+
+    <div class="error" *ngIf="error">
+      <p>❌ {{ error }}</p>
+    </div>
+
+    <div class="table-container" *ngIf="!loading && !error && leaderboard.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Місце</th>
+            <th>Гравець</th>
+            <th>Бали</th>
+            <th>Рівень</th>
+            <th>Дата</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of leaderboard; let i = index" 
+              [class.highlight]="i < 3">
+            <td class="rank">
+              {{ getRankEmoji(i) }} {{ i + 1 }}
+            </td>
+            <td class="player">
+              <span class="avatar">{{ entry.user.avatar }}</span>
+              <span class="username">{{ entry.user.username }}</span>
+            </td>
+            <td class="score">{{ entry.score }}</td>
+            <td class="level">{{ entry.level }}</td>
+            <td class="date">{{ formatDate(entry.playedAt) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && !error && leaderboard.length === 0">
+      <p>🎮 Поки що немає результатів. Будьте першими!</p>
+    </div>
+  </div>
+</div>

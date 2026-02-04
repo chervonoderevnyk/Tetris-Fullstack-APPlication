@@ -39,4 +39,16 @@ login(username: string, password: string): Observable<{ tokenA: string }> {
   getUserDetails(): Observable<any> {
   return this.http.get(`${this.apiUrl}/me`);
 }
+
+  logout(): void {
+    localStorage.removeItem('auth_tokenA');
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  clearToken(): void {
+    localStorage.removeItem('auth_tokenA');
+  }
 }

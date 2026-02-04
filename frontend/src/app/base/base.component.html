@@ -3,7 +3,8 @@
    [score]="score" 
    [level]="level" 
    [avatar]="userAvatar" 
-   [userName]="userName">
+   [userName]="userName"
+   (playerChanged)="onPlayerChanged()">
   </app-header>
   <app-game-board 
     (scoreChange)="onScoreChange($event)" 

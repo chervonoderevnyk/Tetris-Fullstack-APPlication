@@ -83,6 +83,65 @@
   justify-self: end;
 }
 
+.action-button {
+  font-size: 20px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: currentColor;
+  }
+
+  &.leaderboard-button {
+    color: #ffd700;
+
+    &:hover {
+      background: rgba(255, 215, 0, 0.2);
+    }
+  }
+
+  &.logout-button {
+    color: #ff6b6b;
+
+    &:hover {
+      background: rgba(255, 107, 107, 0.2);
+    }
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaderboard-link {
+  font-size: 24px;
+  color: #ffd700;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+    transform: scale(1.1);
+  }
+}
+
 .avatar {
   font-size: 24px;
   border: 2px solid #fff;
@@ -96,4 +155,49 @@
   display: flex;
   gap: 8px; // невелика відстань між рівнем і балами
   padding-right: 40px; // щоб не перекривати центр
+}
+
+// Адаптивні стилі для мобільних пристроїв
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .score {
+    order: 3;
+    padding-right: 0;
+    font-size: 14px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .title {
+    order: 1;
+    font-size: 1.2rem;
+  }
+
+  .level-avatar {
+    order: 2;
+    gap: 8px;
+
+    .action-button {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+
+    .user-info {
+      .user-name {
+        font-size: 14px;
+      }
+
+      .avatar {
+        font-size: 20px;
+        padding: 3px;
+      }
+    }
+  }
 }
