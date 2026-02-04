@@ -128,6 +128,14 @@ exports.Prisma.UserScalarFieldEnum = {
   avatar: 'avatar'
 };
 
+exports.Prisma.ScoreScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  score: 'score',
+  level: 'level',
+  playedAt: 'playedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -140,7 +148,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Score: 'Score'
 };
 
 /**

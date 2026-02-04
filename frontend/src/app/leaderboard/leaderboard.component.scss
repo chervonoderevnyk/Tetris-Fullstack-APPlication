@@ -1,0 +1,222 @@
+.leaderboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #021b2b 0%, #0a3a5e 100%);
+  padding: 20px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .back-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: #0056b3;
+    }
+  }
+}
+
+.user-stats {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 15px;
+      border-radius: 8px;
+
+      .stat-label {
+        font-weight: 500;
+      }
+
+      .stat-value {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #ffd700;
+      }
+    }
+  }
+
+  .ranking {
+    text-align: center;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: #ffd700;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+.leaderboard-table {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .loading, .error, .empty-state {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+  }
+
+  .error {
+    color: #ff6b6b;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    border-radius: 8px;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+
+      thead {
+        background: rgba(255, 255, 255, 0.1);
+
+        th {
+          padding: 15px 10px;
+          text-align: left;
+          font-weight: bold;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+          
+          &:first-child {
+            text-align: center;
+          }
+          &:nth-child(3), &:nth-child(4) {
+            text-align: center;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          transition: background-color 0.3s;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          &.highlight {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            
+            .rank {
+              font-size: 1.2rem;
+              font-weight: bold;
+            }
+          }
+
+          td {
+            padding: 12px 10px;
+
+            &.rank {
+              text-align: center;
+              font-weight: bold;
+            }
+
+            &.player {
+              .avatar {
+                font-size: 1.2rem;
+                margin-right: 8px;
+              }
+
+              .username {
+                font-weight: 500;
+              }
+            }
+
+            &.score, &.level {
+              text-align: center;
+              font-weight: bold;
+              color: #ffd700;
+            }
+
+            &.date {
+              font-size: 0.9rem;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .leaderboard-container {
+    padding: 15px;
+  }
+
+  .header {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .user-stats .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-container {
+    table {
+      font-size: 0.9rem;
+
+      th, td {
+        padding: 8px 6px;
+      }
+
+      .date {
+        display: none;
+      }
+    }
+  }
+}

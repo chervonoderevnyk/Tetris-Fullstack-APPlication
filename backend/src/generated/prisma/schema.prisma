@@ -14,4 +14,17 @@ model User {
   password  String
   createdAt DateTime @default(now())
   avatar    String
+  scores    Score[] // Зв'язок один-до-багатьох з результатами
+}
+
+model Score {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  user     User     @relation(fields: [userId], references: [id])
+  score    Int
+  level    Int
+  playedAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([score])
 }

@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,23 @@ export class HeaderComponent implements OnChanges {
   @Input() level!: number;
   @Input() avatar: string = '🙂';
   @Input() userName: string = 'Гравець';
+  @Output() playerChanged = new EventEmitter<void>();
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.playerChanged.emit();
+    this.router.navigate(['/']);
+  }
+
+  goToLeaderboard(): void {
+    this.router.navigate(['/leaderboard']);
   }
 }

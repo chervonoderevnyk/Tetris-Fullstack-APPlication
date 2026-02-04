@@ -7,7 +7,15 @@
     <span>супер-пупер тетріс</span>
   </div>
   <div class="level-avatar">
-     <span class="user-name" *ngIf="userName && userName !== ''">{{ userName }}</span>
-    <span class="avatar" *ngIf="avatar">{{ avatar }}</span>
+    <button (click)="goToLeaderboard()" class="action-button leaderboard-button" title="Таблиця лідерів">
+      🏆
+    </button>
+    <span class="user-info">
+      <span class="user-name" *ngIf="userName && userName !== ''">{{ userName }}</span>
+      <span class="avatar" *ngIf="avatar">{{ avatar }}</span>
+    </span>
+    <button (click)="logout()" class="action-button logout-button" title="Змінити гравця">
+      🚪
+    </button>
   </div>
 </div>

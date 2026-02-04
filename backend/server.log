@@ -1,0 +1,10 @@
+nohup: всі аргументи проігноровані
+
+> backend@1.0.0 dev
+> ts-node-dev --respawn src/index.ts
+
+[INFO] 17:16:05 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.8.3)
+🚀 Server running on http://localhost:3001
+[INFO] 17:22:06 Restarting: /home/chornyi/tetris-game/backend/src/middlewares/auth.middleware.ts has been modified
+🚀 Server running on http://localhost:3001
+Authorization Header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJpYXQiOjE3NzAyMTgyNjUsImV4cCI6MTc3MDIyMTg2NX0.QLgTNI-518yN5quwzEHyeJzydTUCwd9xg8TWxPr3btU
