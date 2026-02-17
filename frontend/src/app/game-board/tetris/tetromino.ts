@@ -1,10 +1,7 @@
-export type Point = [number, number]; // [рядок, стовпчик]
+import { Point, Tetromino } from '../../types';
 
-export interface Tetromino {
-  shape: Point[]; // Координати відносно центру
-  color: string;
-  isRotatable?: boolean; // Додаємо прапорець для обертання
-}
+// Re-export for backward compatibility
+export type { Point, Tetromino };
 
 export const TETROMINOES: Tetromino[] = [
   {
@@ -21,7 +18,7 @@ export const TETROMINOES: Tetromino[] = [
       [0, 0], [0, 1], [1, 0], [1, 1]
     ],
     color: 'yellow',
-    isRotatable: false // Фігура "O" не обертається
+    isRotatable: false // "O" shape doesn't rotate
   },
   {
     // T

@@ -1,15 +1,8 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { ValidationRule } from '../types';
 
-export interface ValidationRule {
-  field: string;
-  required?: boolean;
-  type?: 'string' | 'number' | 'boolean' | 'email';
-  minLength?: number;
-  maxLength?: number;
-  min?: number;
-  max?: number;
-  pattern?: RegExp;
-}
+// Re-export for backward compatibility
+export { ValidationRule };
 
 export function validateRequest(rules: ValidationRule[]): RequestHandler {
   return (req: Request, res: Response, next: NextFunction): void => {

@@ -1,0 +1,32 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-body">
+      <div class="farewell-icon">
+        👋
+      </div>
+      
+      <h2>Farewell, {{ username }}!</h2>
+      
+      <div class="message-section">
+        <p class="main-message">Account deleted successfully!</p>
+        <p class="sub-message">Thank you for playing our Tetris game.</p>
+        <p class="sub-message">We hope to see you again! 🎮</p>
+      </div>
+      
+      <div class="confetti-container">
+        <span class="confetti">🎊</span>
+        <span class="confetti">🎉</span>
+        <span class="confetti">✨</span>
+        <span class="confetti">🌟</span>
+        <span class="confetti">🎊</span>
+        <span class="confetti">🎉</span>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="close-button" (click)="onClose()">
+        Take me to login
+      </button>
+    </div>
+  </div>
+</div>

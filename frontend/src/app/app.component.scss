@@ -1,20 +1,20 @@
 :host {
   display: flex;
-  flex-direction: column; /* Розташування елементів вертикально */
+  flex-direction: column; /* Vertical layout of elements */
   min-height: 100vh;
-  max-height: 100vh; /* Обмеження висоти екраном */
-  overflow: hidden; /* Приховує вихідний контент */
+  max-height: 100vh; /* Screen height limit */
+  overflow: hidden; /* Hides overflow content */
   background: #021b2b;
 }
 
 app-header {
-  flex-shrink: 0; /* Забезпечує, що header не стискається */
+  flex-shrink: 0; /* Ensures header doesn't shrink */
 }
 
 router-outlet, app-game-board {
-  flex-grow: 1; /* Забезпечує, що контент займає весь доступний простір */
+  flex-grow: 1; /* Ensures content takes all available space */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Додатково приховує вихідний контент */
+  overflow: hidden; /* Additionally hides overflow content */
 }

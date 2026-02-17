@@ -9,21 +9,22 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  avatar    String
-  scores    Score[] // Зв'язок один-до-багатьох з результатами
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  password     String
+  createdAt    DateTime @default(now())
+  avatar       String
+  refreshToken String?
+  scores       Score[]
 }
 
 model Score {
   id       Int      @id @default(autoincrement())
   userId   Int
-  user     User     @relation(fields: [userId], references: [id])
   score    Int
   level    Int
   playedAt DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([score])

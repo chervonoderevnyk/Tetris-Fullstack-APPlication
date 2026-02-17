@@ -3,11 +3,11 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Забезпечує, що header буде поверх інших елементів */
-    // background-color: #fff; /* Додайте фон, якщо потрібно */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Опціонально: тінь для header */
+    z-index: 1000; /* Ensures header stays on top of other elements */
+    // background-color: #fff; /* Add background if needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow for header */
   }
   
 //   app-game-board {
-//     margin-top: 30px; /* Висота header, налаштуйте за потреби */
+//     margin-top: 30px; /* Header height, adjust as needed */
 //   }

@@ -1,21 +1,38 @@
 <div class="header">
   <div class="score">
-    <span>📈 Рівень: {{ level }}</span>
-    <span>🏆 Бали: {{ score }}</span>
+    <span>📈 Level: {{ level }}</span>
+    <span>🏆 Score: {{ score }}</span>
   </div>
   <div class="title">
-    <span>супер-пупер тетріс</span>
+    <span>Super-Duper Tetris</span>
   </div>
   <div class="level-avatar">
-    <button (click)="goToLeaderboard()" class="action-button leaderboard-button" title="Таблиця лідерів">
+    <button (click)="goToLeaderboard()" class="action-button leaderboard-button" title="Leaderboard">
       🏆
     </button>
     <span class="user-info">
       <span class="user-name" *ngIf="userName && userName !== ''">{{ userName }}</span>
       <span class="avatar" *ngIf="avatar">{{ avatar }}</span>
     </span>
-    <button (click)="logout()" class="action-button logout-button" title="Змінити гравця">
+    <button (click)="deleteAccount()" class="action-button delete-button" title="Delete Account">
+      🗑️
+    </button>
+    <button (click)="logout()" class="action-button logout-button" title="Change Player">
       🚪
     </button>
   </div>
 </div>
+
+<!-- Delete Account Modal -->
+<app-delete-account-modal 
+  *ngIf="showDeleteModal"
+  (confirm)="onDeleteConfirm($event)"
+  (cancel)="onDeleteCancel()"
+></app-delete-account-modal>
+
+<!-- Farewell Modal -->
+<app-farewell-modal
+  *ngIf="showFarewellModal"
+  [username]="deletedUsername"
+  (close)="onFarewellClose()"
+></app-farewell-modal>

@@ -23,7 +23,7 @@
   pointer-events: none;
 }
 
-/* Анімація пульсації */
+/* Pulsing animation */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -39,26 +39,26 @@
   }
 }
 
-/* Анімація переливання кольорів */
+/* Color gradient animation */
 @keyframes colorShift {
   0% {
-    color: #f5d142; /* Пастельний жовтий */
+    color: #f5d142; /* Pastel yellow */
   }
   25% {
-    color: #f5a142; /* Пастельний помаранчевий */
+    color: #f5a142; /* Pastel orange */
   }
   50% {
-    color: #a1f542; /* Пастельний зелений */
+    color: #a1f542; /* Pastel green */
   }
   75% {
-    color: #42a1f5; /* Пастельний синій */
+    color: #42a1f5; /* Pastel blue */
   }
   100% {
-    color: #f5d142; /* Повертаємося до пастельного жовтого */
+    color: #f5d142; /* Return to pastel yellow */
   }
 }
 
-/* Анімація сяйва */
+/* Glow animation */
 @keyframes glow {
   0% {
     text-shadow: 0 0 0.5px #f5d142, 0 0 1px #f5d142, 0 0 1.5px #f5a142, 0 0 2px #f5a142, 0 0 2.5px #f5a142;
@@ -66,6 +66,13 @@
   100% {
     text-shadow: 0 0 1px #a1f542, 0 0 2px #a1f542, 0 0 3px #42a1f5, 0 0 4px #42a1f5, 0 0 5px #42a1f5;
   }
+}
+
+/* Shake animation for delete button */
+@keyframes shake {
+  0%, 100% { transform: scale(1.1) translateX(0); }
+  25% { transform: scale(1.1) translateX(-2px); }
+  75% { transform: scale(1.1) translateX(2px); }
 }
 
 .user-name {
@@ -107,6 +114,16 @@
 
     &:hover {
       background: rgba(255, 215, 0, 0.2);
+    }
+  }
+
+  &.delete-button {
+    color: #ff4444;
+
+    &:hover {
+      background: rgba(255, 68, 68, 0.2);
+      transform: scale(1.1);
+      animation: shake 0.5s ease-in-out;
     }
   }
 
@@ -153,11 +170,11 @@
 
 .score {
   display: flex;
-  gap: 8px; // невелика відстань між рівнем і балами
-  padding-right: 40px; // щоб не перекривати центр
+  gap: 8px; // small distance between level and score
+  padding-right: 40px; // so as not to overlap the center
 }
 
-// Адаптивні стилі для мобільних пристроїв
+// Adaptive styles for mobile devices
 @media (max-width: 768px) {
   .header {
     padding: 10px 15px;

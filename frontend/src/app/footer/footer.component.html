@@ -3,18 +3,18 @@
       © 2025 Tetris Game by Ihor Chornyi. 
     </div>
     <div class="center">
-      <a href="#" class="link" (click)="openRulesModal($event)">Правила гри</a>
+      <a href="#" class="link" (click)="openRulesModal($event)">Game Rules</a>
     </div>
     <div class="right">
-      Version 1.0.0 -Усі права захищені.
+      Version 1.0.0 - All rights reserved.
     </div>
 </div>
 
-<!-- Модальне вікно -->
+<!-- Modal window -->
 <div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
     <span class="close" (click)="closeRulesModal()">&times;</span>
-    <h2>Правила гри</h2>
+    <h2>Game Rules</h2>
     <div class="rules-content" [innerHTML]="rulesContent"></div>
   </div>
 </div>

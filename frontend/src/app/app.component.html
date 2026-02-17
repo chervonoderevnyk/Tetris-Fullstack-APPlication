@@ -1,1 +1,19 @@
 <router-outlet></router-outlet>
+
+<!-- Global Error Modal -->
+<app-error-modal 
+  *ngIf="(errorModalVisible$ | async) === true"
+  [isVisible]="(errorModalVisible$ | async) || false"
+  [errorMessage]="(errorMessage$ | async) || ''"
+  (close)="onCloseError()"
+  (retry)="onRetryError()">
+</app-error-modal>
+
+<!-- Global Offline Modal -->
+<app-offline-modal 
+  *ngIf="(offlineModalVisible$ | async) === true"
+  (retry)="onRetryConnection()">
+</app-offline-modal>
+
+<!-- Toast Notifications -->
+<app-toast></app-toast>

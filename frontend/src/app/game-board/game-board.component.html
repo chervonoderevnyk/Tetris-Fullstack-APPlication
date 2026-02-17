@@ -20,11 +20,11 @@
   <button 
     (click)="startGame()" 
     [class.disabled]="isGameRunning">
-    СТАРТ
+    START
   </button>
   <button 
     (click)="togglePause()" 
     [class.disabled]="!isGameRunning">
-    {{ isPaused ? 'Продовжити' : 'Пауза' }}
+    {{ isPaused ? 'Continue' : 'Pause' }}
   </button>
 </div>

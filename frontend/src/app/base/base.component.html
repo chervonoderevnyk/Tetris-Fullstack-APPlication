@@ -4,7 +4,8 @@
    [level]="level" 
    [avatar]="userAvatar" 
    [userName]="userName"
-   (playerChanged)="onPlayerChanged()">
+   (playerChanged)="onPlayerChanged()"
+   (leaderboardNavigation)="navigateToLeaderboard()">
   </app-header>
   <app-game-board 
     (scoreChange)="onScoreChange($event)" 

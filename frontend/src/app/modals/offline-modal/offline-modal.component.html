@@ -1,0 +1,42 @@
+<div class="offline-modal-backdrop">
+  <div class="offline-modal-content">
+    
+    <!-- Offline Icon with Animation -->
+    <div class="offline-icon">
+      <span class="icon-main">📶</span>
+      <div class="offline-indicator">❌</div>
+      <div class="offline-glow"></div>
+    </div>
+    
+    <!-- Offline Title -->
+    <h2 class="offline-title">No Internet Connection</h2>
+    
+    <!-- Offline Message -->
+    <div class="offline-message">
+      <p>Please check your internet connection</p>
+      <p>Your game progress is saved locally! 🎮</p>
+      <div class="connection-status">
+        <span class="status-dot offline"></span>
+        <span>Offline Mode</span>
+      </div>
+    </div>
+    
+    <!-- Action Button -->
+    <div class="offline-actions">
+      <button 
+        class="btn btn-retry" 
+        (click)="onRetry()"
+        type="button">
+        <span class="btn-icon">🔄</span>
+        Check Connection
+      </button>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="offline-decoration">
+      <span class="deco-1">🌐</span>
+      <span class="deco-2">📡</span>
+      <span class="deco-3">⚡</span>
+    </div>
+  </div>
+</div>

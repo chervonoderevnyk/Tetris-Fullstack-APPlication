@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,15 +12,29 @@ import { availableAvatars } from '../../assets/emoji-avatars';
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss']
 })
-export class AuthPageComponent {
+export class AuthPageComponent implements OnInit {
   username: string = '';
   password: string = '';
-  selectedAvatar: string = availableAvatars[0]; // Вибрана аватарка за замовчуванням
+  selectedAvatar: string = availableAvatars[0]; // Default selected avatar
   isLoginMode: boolean = true;
   message: string = '';
-  avatars = availableAvatars; // Список доступних аватарок
+  avatars = availableAvatars; // List of available avatars
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    // Check authentication status
+    this.authService.checkAuthenticationStatus().subscribe({
+      next: (isAuthenticated) => {
+        if (isAuthenticated) {
+          this.router.navigate(['/base']);
+        }
+      },
+      error: () => {
+        // User not authenticated - stay on login page
+      }
+    });
+  }
 
   toggleMode(): void {
     this.isLoginMode = !this.isLoginMode;
@@ -31,23 +45,19 @@ export class AuthPageComponent {
     if (this.isLoginMode) {
       this.authService.login(this.username, this.password).subscribe({
         next: (response) => {
-          console.log('Submitted', this.username, this.password);
-
-          this.authService.saveToken(response.tokenA);
           this.router.navigate(['/base']);
         },
-        error: () => {
-          this.message = 'Помилка входу. Перевірте дані.';
+        error: (err) => {
+          this.message = 'Login error. Please check your credentials.';
         }
       });
     } else {
       this.authService.register(this.username, this.password, this.selectedAvatar).subscribe({
-        next: () => {
-          this.message = 'Успішна реєстрація! Тепер увійдіть.';
-          this.isLoginMode = true;
+        next: (response) => {
+          this.router.navigate(['/base']);
         },
         error: (err) => {
-          this.message = err?.error?.error || 'Помилка реєстрації. Спробуйте ще раз.';
+          this.message = err?.error?.error || 'Registration error. Please try again.';
         }
       });
     }
