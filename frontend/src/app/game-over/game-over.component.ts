@@ -26,7 +26,7 @@ export class GameOverComponent {
       this.finalScore = +params['score'] || 0;
       this.finalLevel = +params['level'] || 1;
       
-      // Автоматично зберігаємо результат при завантаженні компонента
+      // Automatically save result when component loads
       this.saveScore();
     });
   }
@@ -38,26 +38,25 @@ export class GameOverComponent {
         next: (result) => {
           this.scoreSaved = true;
           this.saving = false;
-          console.log('Результат збережено:', result);
         },
         error: (error) => {
           this.saving = false;
           if (error.status === 401) {
-            this.saveError = 'Потрібно увійти в систему для збереження результату';
+            this.saveError = 'You need to login to save the score';
           } else {
-            this.saveError = 'Помилка збереження результату';
+            this.saveError = 'Error saving score';
           }
-          console.error('Помилка збереження результату:', error);
+          console.error('Score save error:', error);
         }
       });
     }
   }
 
   restartGame(): void {
-    this.router.navigate(['/base']);  // Перезапуск гри
+    this.router.navigate(['/base']);  // Restart game
   }
 
   viewLeaderboard(): void {
-    this.router.navigate(['/leaderboard']);  // Перехід до лідерборду
+    this.router.navigate(['/leaderboard']);  // Navigate to leaderboard
   }
 }

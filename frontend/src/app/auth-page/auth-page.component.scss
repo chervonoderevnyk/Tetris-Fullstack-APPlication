@@ -36,14 +36,14 @@
   }
   
   .auth-container form input {
-    width: 100%; /* Встановлюємо однакову ширину для всіх полів */
+    width: 100%; /* Set same width for all fields */
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
     transition: border-color 0.3s;
-    box-sizing: border-box; /* Враховує padding у ширині */
+    box-sizing: border-box; /* Include padding in width */
   }
   
   .auth-container form input:focus {
@@ -51,7 +51,7 @@
   }
   
   .auth-container button {
-    width: 100%; /* Встановлюємо однакову ширину для кнопок */
+    width: 100%; /* Set same width for buttons */
     padding: 10px;
     font-size: 16px;
     cursor: pointer;

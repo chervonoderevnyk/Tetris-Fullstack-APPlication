@@ -2,25 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ScoreService } from '../services/score.service';
-
-interface LeaderboardEntry {
-  id: number;
-  score: number;
-  level: number;
-  playedAt: Date;
-  user: {
-    username: string;
-    avatar: string;
-  };
-}
-
-interface UserStats {
-  totalGames: number;
-  bestScore: number;
-  maxLevel: number;
-  averageScore: number;
-  averageLevel: number;
-}
+import { LeaderboardEntry, UserStats } from '../types';
 
 @Component({
   selector: 'app-leaderboard',
@@ -55,8 +37,8 @@ export class LeaderboardComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Помилка завантаження лідерборду:', err);
-        this.error = 'Не вдалося завантажити лідерборд';
+        console.error('Leaderboard loading error:', err);
+        this.error = 'Failed to load leaderboard';
         this.loading = false;
       }
     });
@@ -68,7 +50,7 @@ export class LeaderboardComponent implements OnInit {
         this.userStats = data;
       },
       error: (err) => {
-        console.error('Помилка завантаження статистики:', err);
+        console.error('Statistics loading error:', err);
       }
     });
   }
@@ -79,7 +61,7 @@ export class LeaderboardComponent implements OnInit {
         this.userRanking = data;
       },
       error: (err) => {
-        console.error('Помилка завантаження рейтингу:', err);
+        console.error('Ranking loading error:', err);
       }
     });
   }

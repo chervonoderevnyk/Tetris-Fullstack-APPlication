@@ -1,42 +1,42 @@
 <div class="leaderboard-container">
   <div class="header">
-    <h1>🏆 Таблиця лідерів</h1>
-    <button class="back-button" (click)="goBack()">← Назад до гри</button>
+    <h1>🏆 Leaderboard</h1>
+    <button class="back-button" (click)="goBack()">← Back to Game</button>
   </div>
 
-  <!-- Статистика користувача -->
+  <!-- User statistics -->
   <div class="user-stats" *ngIf="userStats">
-    <h2>📊 Ваша статистика</h2>
+    <h2>📊 Your Statistics</h2>
     <div class="stats-grid">
       <div class="stat-item">
-        <span class="stat-label">🎮 Загалом ігор:</span>
+        <span class="stat-label">🎮 Total Games:</span>
         <span class="stat-value">{{ userStats.totalGames }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-label">🏆 Найкращий результат:</span>
+        <span class="stat-label">🏆 Best Score:</span>
         <span class="stat-value">{{ userStats.bestScore }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-label">📈 Максимальний рівень:</span>
+        <span class="stat-label">📈 Max Level:</span>
         <span class="stat-value">{{ userStats.maxLevel }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-label">📊 Середній бал:</span>
+        <span class="stat-label">📊 Average Score:</span>
         <span class="stat-value">{{ userStats.averageScore }}</span>
       </div>
     </div>
     
     <div class="ranking" *ngIf="userRanking">
-      <h3>🎯 Ваше місце в рейтингу: {{ userRanking.position }}</h3>
+      <h3>🎯 Your Ranking Position: {{ userRanking.position }}</h3>
     </div>
   </div>
 
-  <!-- Лідерборд -->
+  <!-- Leaderboard -->
   <div class="leaderboard-table">
-    <h2>🥇 Топ гравців</h2>
+    <h2>🥇 Top Players</h2>
     
     <div class="loading" *ngIf="loading">
-      <p>⏳ Завантаження...</p>
+      <p>⌛ Loading...</p>
     </div>
 
     <div class="error" *ngIf="error">
@@ -47,11 +47,11 @@
       <table>
         <thead>
           <tr>
-            <th>Місце</th>
-            <th>Гравець</th>
-            <th>Бали</th>
-            <th>Рівень</th>
-            <th>Дата</th>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Level</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -73,7 +73,7 @@
     </div>
 
     <div class="empty-state" *ngIf="!loading && !error && leaderboard.length === 0">
-      <p>🎮 Поки що немає результатів. Будьте першими!</p>
+      <p>🎮 No results yet. Be the first!</p>
     </div>
   </div>
 </div>

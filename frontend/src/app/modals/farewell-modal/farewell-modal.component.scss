@@ -1,0 +1,260 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  max-width: 450px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  animation: slideIn 0.5s ease;
+  border: 3px solid #ffd700;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.8) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-body {
+  padding: 40px 30px;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.farewell-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { 
+    transform: rotate(-10deg);
+  }
+  50% { 
+    transform: rotate(10deg);
+  }
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin: 0 0 30px 0;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px #ffd700;
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px #ffd700, 0 0 30px #ffd700;
+  }
+}
+
+.message-section {
+  margin-bottom: 30px;
+  
+  .main-message {
+    font-size: 1.3rem;
+    color: #00ff88;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    animation: pulse 2s infinite;
+  }
+  
+  .sub-message {
+    font-size: 1.1rem;
+    color: #e1f5fe;
+    margin: 8px 0;
+    opacity: 0.9;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  
+  .confetti {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: fall 3s infinite linear;
+    
+    &:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 3s;
+    }
+    
+    &:nth-child(2) {
+      left: 20%;
+      animation-delay: 0.5s;
+      animation-duration: 2.5s;
+    }
+    
+    &:nth-child(3) {
+      right: 25%;
+      animation-delay: 1s;
+      animation-duration: 2.8s;
+    }
+    
+    &:nth-child(4) {
+      right: 15%;
+      animation-delay: 1.5s;
+      animation-duration: 3.2s;
+    }
+    
+    &:nth-child(5) {
+      left: 80%;
+      animation-delay: 2s;
+      animation-duration: 2.3s;
+    }
+    
+    &:nth-child(6) {
+      right: 40%;
+      animation-delay: 0.3s;
+      animation-duration: 3.5s;
+    }
+  }
+}
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    transform: translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.modal-footer {
+  padding: 20px 30px 30px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  
+  .close-button {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1e3c72;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Particle effects
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  animation: sparkle 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+// Mobile responsive
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .modal-body {
+    padding: 30px 20px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .farewell-icon {
+    font-size: 3rem;
+  }
+  
+  .message-section {
+    .main-message {
+      font-size: 1.1rem;
+    }
+    
+    .sub-message {
+      font-size: 1rem;
+    }
+  }
+}

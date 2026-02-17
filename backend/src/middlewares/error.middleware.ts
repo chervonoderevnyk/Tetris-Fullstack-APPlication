@@ -9,7 +9,7 @@ export const errorHandler = (
 ): void => {
   console.error('Error:', err);
 
-  // Якщо це наша кастомна помилка
+  // If this is our custom error
   if (err instanceof AppError) {
     res.status(err.statusCode).json({
       error: err.message,
@@ -18,11 +18,11 @@ export const errorHandler = (
     return;
   }
 
-  // Prisma помилки
+  // Prisma errors
   if (err.name === 'PrismaClientKnownRequestError') {
     const prismaErr = err as any;
     
-    // Унікальне обмеження
+    // Unique constraint violation
     if (prismaErr.code === 'P2002') {
       res.status(409).json({ 
         error: 'Resource already exists',
@@ -31,14 +31,14 @@ export const errorHandler = (
       return;
     }
     
-    // Запис не знайдено
+    // Record not found
     if (prismaErr.code === 'P2025') {
       res.status(404).json({ error: 'Resource not found' });
       return;
     }
   }
 
-  // JWT помилки
+  // JWT errors
   if (err.name === 'JsonWebTokenError') {
     res.status(401).json({ error: 'Invalid token' });
     return;
@@ -49,13 +49,13 @@ export const errorHandler = (
     return;
   }
 
-  // Загальні помилки валідації
+  // General validation errors
   if (err.name === 'ValidationError') {
     res.status(400).json({ error: err.message });
     return;
   }
 
-  // Непередбачені помилки
+  // Unexpected errors
   res.status(500).json({
     error: 'Internal server error',
     ...(process.env.NODE_ENV === 'development' && { 

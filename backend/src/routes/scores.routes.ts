@@ -10,10 +10,10 @@ const saveScoreValidation = validateRequest([
   { field: 'level', required: true, type: 'number', min: 1 }
 ]);
 
-// Публічний маршрут для лідерборду
+// Public route for leaderboard
 router.get('/leaderboard', ScoreController.getLeaderboard);
 
-// Захищені маршрути (потрібна аутентифікація)
+// Protected routes (authentication required)
 router.post('/save', authenticateToken, saveScoreValidation, ScoreController.saveScore);
 router.get('/my-scores', authenticateToken, ScoreController.getUserBestScores);
 router.get('/my-stats', authenticateToken, ScoreController.getUserStats);

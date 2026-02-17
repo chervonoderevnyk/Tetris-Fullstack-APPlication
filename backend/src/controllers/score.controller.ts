@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { ScoreService } from '../services/score.service';
-import { AuthRequest } from '../middlewares/auth.middleware';
+import { AuthRequest } from '../types';
 
 export class ScoreController {
-  // Збереження результату гри (потребує аутентифікації)
+  // Save game result (requires authentication)
   static async saveScore(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { score, level } = req.body;
@@ -16,7 +16,7 @@ export class ScoreController {
     }
   }
 
-  // Отримання лідерборду (публічний доступ)
+  // Get leaderboard (public access)
   static async getLeaderboard(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const limit = parseInt(req.query.limit as string) || 10;
@@ -27,7 +27,7 @@ export class ScoreController {
     }
   }
 
-  // Отримання кращих результатів користувача
+  // Get user's best scores
   static async getUserBestScores(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.userId!;
@@ -40,7 +40,7 @@ export class ScoreController {
     }
   }
 
-  // Отримання статистики користувача
+  // Get user statistics
   static async getUserStats(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.userId!;
@@ -51,7 +51,7 @@ export class ScoreController {
     }
   }
 
-  // Отримання позиції користувача в рейтингу
+  // Get user's ranking position
   static async getUserRanking(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.userId!;

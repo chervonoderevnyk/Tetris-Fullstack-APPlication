@@ -1016,6 +1016,7 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     avatar: string | null
+    refreshToken: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1024,6 +1025,7 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     avatar: string | null
+    refreshToken: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1032,6 +1034,7 @@ export namespace Prisma {
     password: number
     createdAt: number
     avatar: number
+    refreshToken: number
     _all: number
   }
 
@@ -1050,6 +1053,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     avatar?: true
+    refreshToken?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1058,6 +1062,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     avatar?: true
+    refreshToken?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1066,6 +1071,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     avatar?: true
+    refreshToken?: true
     _all?: true
   }
 
@@ -1161,6 +1167,7 @@ export namespace Prisma {
     password: string
     createdAt: Date
     avatar: string
+    refreshToken: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1188,6 +1195,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     avatar?: boolean
+    refreshToken?: boolean
     scores?: boolean | User$scoresArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1198,6 +1206,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     avatar?: boolean
+    refreshToken?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1206,6 +1215,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     avatar?: boolean
+    refreshToken?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1214,9 +1224,10 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     avatar?: boolean
+    refreshToken?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "createdAt" | "avatar", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "createdAt" | "avatar" | "refreshToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     scores?: boolean | User$scoresArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1235,6 +1246,7 @@ export namespace Prisma {
       password: string
       createdAt: Date
       avatar: string
+      refreshToken: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1664,6 +1676,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly avatar: FieldRef<"User", 'String'>
+    readonly refreshToken: FieldRef<"User", 'String'>
   }
     
 
@@ -3217,7 +3230,8 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     createdAt: 'createdAt',
-    avatar: 'avatar'
+    avatar: 'avatar',
+    refreshToken: 'refreshToken'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3248,6 +3262,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3323,6 +3345,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     avatar?: StringFilter<"User"> | string
+    refreshToken?: StringNullableFilter<"User"> | string | null
     scores?: ScoreListRelationFilter
   }
 
@@ -3332,6 +3355,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     avatar?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     scores?: ScoreOrderByRelationAggregateInput
   }
 
@@ -3344,6 +3368,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     avatar?: StringFilter<"User"> | string
+    refreshToken?: StringNullableFilter<"User"> | string | null
     scores?: ScoreListRelationFilter
   }, "id" | "username">
 
@@ -3353,6 +3378,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     avatar?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -3369,6 +3395,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     avatar?: StringWithAggregatesFilter<"User"> | string
+    refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type ScoreWhereInput = {
@@ -3433,6 +3460,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     avatar: string
+    refreshToken?: string | null
     scores?: ScoreCreateNestedManyWithoutUserInput
   }
 
@@ -3442,6 +3470,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     avatar: string
+    refreshToken?: string | null
     scores?: ScoreUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -3450,6 +3479,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     scores?: ScoreUpdateManyWithoutUserNestedInput
   }
 
@@ -3459,6 +3489,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     scores?: ScoreUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -3468,6 +3499,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     avatar: string
+    refreshToken?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -3475,6 +3507,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -3483,6 +3516,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScoreCreateInput = {
@@ -3574,10 +3608,30 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ScoreListRelationFilter = {
     every?: ScoreWhereInput
     some?: ScoreWhereInput
     none?: ScoreWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ScoreOrderByRelationAggregateInput = {
@@ -3590,6 +3644,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     avatar?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -3602,6 +3657,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     avatar?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -3610,6 +3666,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     avatar?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -3662,6 +3719,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -3727,6 +3802,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type ScoreUpdateManyWithoutUserNestedInput = {
@@ -3815,6 +3894,20 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3873,6 +3966,34 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ScoreCreateWithoutUserInput = {
     score: number
     level: number
@@ -3928,6 +4049,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     avatar: string
+    refreshToken?: string | null
   }
 
   export type UserUncheckedCreateWithoutScoresInput = {
@@ -3936,6 +4058,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     avatar: string
+    refreshToken?: string | null
   }
 
   export type UserCreateOrConnectWithoutScoresInput = {
@@ -3959,6 +4082,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateWithoutScoresInput = {
@@ -3967,6 +4091,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScoreCreateManyUserInput = {

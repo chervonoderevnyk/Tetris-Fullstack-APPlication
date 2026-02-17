@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [HttpClientModule, CommonModule], // Додано HttpClientModule і CommonModule
+  imports: [HttpClientModule, CommonModule], // Added HttpClientModule and CommonModule
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
@@ -20,14 +20,14 @@ export class FooterComponent {
     event.preventDefault();
     this.isModalOpen = true;
 
-    // Завантаження правил з файлу rules.md
+    // Load rules from rules.md file
     this.http.get('assets/docs/rules.md', { responseType: 'text' }).subscribe({
       next: (data) => {
         this.rulesContent = this.convertMarkdownToHtml(data);
       },
       error: (err) => {
-        console.error('Не вдалося завантажити правила гри:', err);
-        this.rulesContent = '<p>Не вдалося завантажити правила гри.</p>';
+        console.error('Failed to load game rules:', err);
+        this.rulesContent = '<p>Failed to load game rules.</p>';
       }
     });
   }
@@ -37,7 +37,7 @@ export class FooterComponent {
   }
 
   private convertMarkdownToHtml(markdown: string): string {
-    // Простий конвертер Markdown у HTML (можна замінити на бібліотеку, наприклад, marked.js)
+    // Simple Markdown to HTML converter (can be replaced with library, e.g., marked.js)
     return markdown.replace(/\n/g, '<br>').replace(/## (.+)/g, '<h2>$1</h2>');
   }
 }

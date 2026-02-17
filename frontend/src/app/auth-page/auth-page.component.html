@@ -1,16 +1,16 @@
 <div class="auth-container">
-    <h2>{{ isLoginMode ? 'Вхід у ТЕТРІС' : 'Реєстрація у ТЕТРІС' }}</h2>
+    <h2>{{ isLoginMode ? 'Login to TETRIS' : 'Register for TETRIS' }}</h2>
     <form (ngSubmit)="onSubmit()">
       <div>
-        <label for="username">Ім'я: </label>
+        <label for="username">Name: </label>
         <input type="text" id="username" [(ngModel)]="username" name="username" required />
       </div>
       <div>
-        <label for="password">Пароль: </label>
+        <label for="password">Password: </label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required />
       </div>
       <div *ngIf="!isLoginMode">
-        <label for="avatar">Виберіть аватарку:</label>
+        <label for="avatar">Choose avatar:</label>
         <div class="avatar-list">
           <span 
             *ngFor="let avatar of avatars" 
@@ -20,12 +20,12 @@
           </span>
         </div>
       </div>
-      <button type="submit">{{ isLoginMode ? 'Увійти' : 'Зареєструватися' }}</button>
+      <button type="submit">{{ isLoginMode ? 'Login' : 'Register' }}</button>
     </form>
   
     <p class="message" *ngIf="message">{{ message }}</p>
   
     <button class="toggle-button" (click)="toggleMode()">
-      {{ isLoginMode ? 'Зареєструватися' : 'Повернутись до входу' }}
+      {{ isLoginMode ? 'Register' : 'Return to login' }}
     </button>
   </div>

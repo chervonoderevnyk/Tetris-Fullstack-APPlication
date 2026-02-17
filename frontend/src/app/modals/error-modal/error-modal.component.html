@@ -1,0 +1,45 @@
+<div class="error-modal-backdrop" (click)="onClose()">
+  <div class="error-modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Error Icon with Animation -->
+    <div class="error-icon">
+      <span class="icon-main">⚠️</span>
+      <div class="error-glow"></div>
+    </div>
+    
+    <!-- Error Title -->
+    <h2 class="error-title">Oops! Something went wrong</h2>
+    
+    <!-- Error Message -->
+    <div class="error-message">
+      <p>The server encountered an unexpected error.</p>
+      <p>Don't worry, your progress is safe! 🎮</p>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="error-actions">
+      <button 
+        class="btn btn-retry" 
+        (click)="onRetry()"
+        type="button">
+        <span class="btn-icon">🔄</span>
+        Try Again
+      </button>
+      
+      <button 
+        class="btn btn-close" 
+        (click)="onClose()"
+        type="button">
+        <span class="btn-icon">❌</span>
+        Close
+      </button>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="error-decoration">
+      <span class="deco-1">💥</span>
+      <span class="deco-2">⚡</span>
+      <span class="deco-3">🔧</span>
+    </div>
+  </div>
+</div>

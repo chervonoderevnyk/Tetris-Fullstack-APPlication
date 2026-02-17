@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { AuthController } from '../controllers/auth.controller';
 import { authenticateToken } from '../middlewares/auth.middleware';
 import { validateRequest } from '../middlewares/validation.middleware';
+import { refreshTokenRateLimit } from '../middlewares/rate-limit.middleware';
 
 const router = Router();
 
@@ -16,8 +17,16 @@ const loginValidation = validateRequest([
   { field: 'password', required: true, type: 'string' }
 ]);
 
+const deleteAccountValidation = validateRequest([
+  { field: 'password', required: true, type: 'string' }
+]);
+
 router.post('/register', registerValidation, AuthController.register);
 router.post('/login', loginValidation, AuthController.login);
+router.post('/refresh', refreshTokenRateLimit, AuthController.refresh); // With rate limiting
+router.post('/logout', authenticateToken, AuthController.logout); // Protected logout
+router.get('/status', AuthController.status); // Authentication status check
 router.get('/me', authenticateToken, AuthController.me);
+router.delete('/delete-account', authenticateToken, deleteAccountValidation, AuthController.deleteAccount); // Protected account deletion with validation
 
 export default router;

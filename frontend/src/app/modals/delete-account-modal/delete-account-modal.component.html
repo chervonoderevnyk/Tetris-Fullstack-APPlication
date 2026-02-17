@@ -1,0 +1,55 @@
+<div class="modal-backdrop" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>⚠️ Delete Account</h2>
+      <button class="close-button" (click)="onCancel()">✖️</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="warning-section">
+        <div class="warning-icon">🚨</div>
+        <div class="warning-text">
+          <h3>This action cannot be undone!</h3>
+          <p>Deleting your account will permanently:</p>
+          <ul>
+            <li>❌ Remove your account from the system</li>
+            <li>🏆 Delete all your game scores</li>
+            <li>📊 Remove your data from leaderboards</li>
+            <li>💾 Erase all your progress</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="password-section">
+        <label for="password">Enter your password to confirm:</label>
+        <input 
+          type="password" 
+          id="password"
+          [(ngModel)]="password"
+          (input)="onPasswordInput($event)"
+          placeholder="Your current password"
+          [disabled]="isLoading"
+          class="password-input"
+        />
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button 
+        class="cancel-button" 
+        (click)="onCancel()"
+        [disabled]="isLoading"
+      >
+        Cancel
+      </button>
+      <button 
+        class="delete-button" 
+        (click)="onConfirm()"
+        [disabled]="!password.trim() || isLoading"
+      >
+        <span *ngIf="!isLoading">🗑️ Delete Account</span>
+        <span *ngIf="isLoading">⏳ Deleting...</span>
+      </button>
+    </div>
+  </div>
+</div>
