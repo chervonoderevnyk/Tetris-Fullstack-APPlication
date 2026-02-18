@@ -2,10 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, throwError } from "rxjs";
 import { ScoreData, LeaderboardEntry, UserStats, UserRanking } from '../types';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ScoreService {
-  private apiUrl = 'http://localhost:3001/scores';
+  private apiUrl = `${environment.apiUrl}/scores`;
 
   constructor(private http: HttpClient) {}
 

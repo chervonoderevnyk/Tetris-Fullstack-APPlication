@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tetromino } from '../types';
+import { Tetromino } from '../../../types';
 import { TETROMINOES } from './tetris/tetromino';
 import { Router, RouterModule } from '@angular/router';
-import { GameStateService } from '../services/game-state.service';
+import { GameStateService } from '../../../services/game-state.service';
 
 @Component({
   selector: 'app-game-board',
