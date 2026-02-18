@@ -56,9 +56,11 @@ Navigate to `http://localhost:4200` to start playing!
 
 ### 👤 User Management  
 - **Secure Authentication** with JWT + refresh tokens
+- **Advanced Password Validation** with comprehensive security requirements
 - **Custom Avatar System** with emoji selection
 - **Complete Account Management** including secure deletion
 - **Personal Statistics** and gameplay history
+- **Password Visibility Toggle** for enhanced user experience
 
 ### 🏆 Competitive Features
 - **Global Leaderboards** with real-time updates
@@ -73,6 +75,9 @@ Navigate to `http://localhost:4200` to start playing!
 - **Security-First Design** with comprehensive validation
 - **Repository Pattern** for clean data access
 - **Comprehensive Testing** with full coverage
+- **Professional File Organization** following Angular best practices
+- **Password Strength Validation** with real-time feedback
+- **User Experience Enhancements** (password visibility toggle)
 
 ## 🏗️ Architecture
 
@@ -111,10 +116,16 @@ graph TB
 tetris-game/
 ├── 🎨 frontend/           # Angular 19 application
 │   ├── src/app/
-│   │   ├── modals/        # Professional modal system
+│   │   ├── components/    # Professional component organization
+│   │   │   ├── pages/     # Page-level components (auth, game)
+│   │   │   ├── shared/    # Reusable UI components
+│   │   │   ├── game/      # Game-specific components
+│   │   │   └── modals/    # Professional modal system
+│   │   ├── core/          # Core application features
+│   │   │   ├── guards/    # Route protection
+│   │   │   └── interceptors/ # HTTP interceptors
 │   │   ├── services/      # Business logic services
-│   │   ├── guards/        # Route protection
-│   │   └── interceptors/  # HTTP interceptors
+│   │   └── types/         # TypeScript type definitions
 │   └── 📖 README.md       # Frontend documentation
 ├── ⚙️ backend/            # Node.js API server
 │   ├── src/
@@ -122,6 +133,7 @@ tetris-game/
 │   │   ├── services/      # Business logic
 │   │   ├── repositories/  # Data access layer
 │   │   ├── middlewares/   # Express middlewares
+│   │   ├── utils/         # Utility functions (password validation)
 │   │   └── types/         # TypeScript definitions
 │   ├── prisma/            # Database schema & migrations
 │   └── 📖 README.md       # Backend documentation
@@ -159,6 +171,15 @@ npx prisma generate       # Regenerate client
 ## 🛡️ Security Features
 
 - ✅ **JWT Authentication** with refresh token rotation
+- ✅ **Advanced Password Validation** with comprehensive requirements:
+  - Minimum 8 characters length
+  - At least 1 uppercase letter (A-Z)
+  - At least 1 lowercase letter (a-z)  
+  - At least 1 digit (0-9)
+  - At least 1 special character (!@#$%^&*)
+  - Protection against common passwords
+  - Validation against repeating sequences
+  - Prevention of sequential characters (123, abc)
 - ✅ **Password Verification** for sensitive operations
 - ✅ **Rate Limiting** with sliding window algorithm
 - ✅ **Input Validation** and sanitization
@@ -208,6 +229,33 @@ docker-compose up --build
 3. Commit changes: `git commit -m 'feat: add amazing feature'`
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Submit a Pull Request
+
+## 🆕 Recent Updates
+
+### Security & Architecture Improvements
+
+#### 🔒 Enhanced Password Security
+- **Comprehensive Password Validation**: Implemented strict security requirements
+  - Minimum 8 characters with mixed case, digits, and special characters
+  - Protection against common passwords and sequential patterns
+  - Real-time validation feedback with helpful tips
+- **Password Visibility Toggle**: User-friendly emoji-based toggle (🙈/👁️)
+- **Secure Password Storage**: Enhanced bcrypt hashing with proper validation
+
+#### 🏗️ Professional Code Organization  
+- **Angular Best Practices**: Restructured frontend following professional patterns
+  - `components/` organized into `pages/`, `shared/`, `game/`, and `modals/`
+  - `core/` folder for guards and interceptors
+  - `services/` and `types/` for clean separation of concerns
+- **Backend Architecture**: Enhanced folder structure with utilities and validation
+- **TypeScript Excellence**: Comprehensive type definitions across the application
+
+#### 🎯 User Experience Improvements
+- **Intuitive Password Management**: Toggle between password visibility states
+- **Enhanced Registration Flow**: Clear validation feedback during signup
+- **Professional UI Components**: Consistent design patterns throughout
+
+---
 
 ## 📄 License
 

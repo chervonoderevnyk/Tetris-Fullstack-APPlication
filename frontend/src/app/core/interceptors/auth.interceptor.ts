@@ -1,8 +1,8 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError, BehaviorSubject, filter, take, finalize } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { ErrorService } from '../services/error.service';
+import { AuthService } from '../../services/auth.service';
+import { ErrorService } from '../../services/error.service';
 import { Router } from '@angular/router';
 
 // Global state to avoid multiple refresh requests

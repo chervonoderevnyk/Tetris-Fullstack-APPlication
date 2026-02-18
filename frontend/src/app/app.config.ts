@@ -1,13 +1,13 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
-import { AuthGuard } from './guards/auth.guard';
-import { AuthPageComponent } from './auth-page/auth-page.component';
-import { BaseComponent } from './base/base.component';
-import { GameOverComponent } from './game-over/game-over.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { CredentialsInterceptor } from './core/interceptors/credentials.interceptor';
+import { AuthGuard } from './core/guards/auth.guard';
+import { AuthPageComponent } from './components/pages/auth-page/auth-page.component';
+import { BaseComponent } from './components/pages/base/base.component';
+import { GameOverComponent } from './components/pages/game-over/game-over.component';
+import { LeaderboardComponent } from './components/pages/leaderboard/leaderboard.component';
 
 const routes = [
   { path: '', component: AuthPageComponent },

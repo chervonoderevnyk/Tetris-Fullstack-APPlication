@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthRequest, SecurityEventType } from '../types';
 import { CookieMiddleware } from '../middlewares/cookie.middleware';
 import { securityLogger } from '../utils/security-logger';
+import { PasswordValidator } from '../utils/password-validator';
 
 export class AuthController {
   static async register(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -205,6 +206,39 @@ export class AuthController {
     } catch (error: any) {
       console.error('Delete account error:', error);
       res.status(400).json({ error: error.message });
+    }
+  }
+
+  // Password strength check (public endpoint)
+  static async checkPasswordStrength(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { password, username } = req.body;
+      
+      if (!password) {
+        res.status(400).json({ error: 'Password is required for validation' });
+        return;
+      }
+
+      const validation = PasswordValidator.validate(password);
+      const isSimilarToUsername = username ? PasswordValidator.isPasswordSimilarToUsername(password, username) : false;
+      
+      // Add username similarity error if needed
+      if (isSimilarToUsername) {
+        validation.errors.push('Password should not contain or be similar to the username');
+        validation.isValid = false;
+      }
+
+      res.json({
+        isValid: validation.isValid,
+        errors: validation.errors,
+        strength: validation.strength,
+        score: validation.score,
+        tips: PasswordValidator.generatePasswordTips()
+      });
+
+    } catch (error: any) {
+      console.error('Password strength check error:', error);
+      res.status(500).json({ error: 'Error checking password strength' });
     }
   }
 }

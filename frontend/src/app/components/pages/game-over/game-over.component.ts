@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ScoreService } from '../services/score.service';
+import { ScoreService } from '../../../services/score.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

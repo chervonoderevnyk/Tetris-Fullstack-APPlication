@@ -1,4 +1,4 @@
-import { Point, Tetromino } from '../../types';
+import { Point, Tetromino } from '../../../../types';
 
 // Re-export for backward compatibility
 export type { Point, Tetromino };

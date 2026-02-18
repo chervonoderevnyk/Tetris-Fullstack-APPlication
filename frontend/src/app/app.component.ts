@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ErrorModalComponent, OfflineModalComponent, ToastComponent } from './modals';
+import { AsyncPipe } from '@angular/common';
+import { ErrorModalComponent, OfflineModalComponent, ToastComponent } from './components/modals';
 import { ErrorService } from './services/error.service';
 import { NetworkService } from './services/network.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ErrorModalComponent, OfflineModalComponent, ToastComponent, CommonModule],
+  imports: [RouterOutlet, AsyncPipe, ErrorModalComponent, OfflineModalComponent, ToastComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

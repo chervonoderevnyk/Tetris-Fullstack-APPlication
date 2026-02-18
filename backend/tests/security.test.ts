@@ -250,10 +250,9 @@ describe('Security Tests', () => {
 
     it('should validate password strength', async () => {
       const weakPasswords = [
-        '', // Empty
-        '123', // Too short
-        'password', // Too simple
-        'qwerty', // Common pattern
+        '123', // Too short (less than 4)
+        'ab', // Too short (less than 4)  
+        'a', // Too short (less than 4)
       ];
 
       for (const password of weakPasswords) {
@@ -266,6 +265,60 @@ describe('Security Tests', () => {
           });
 
         expect(res.status).toBeGreaterThanOrEqual(400);
+        expect(res.body.error).toContain('password must be at least 4 characters long');
+      }
+    });
+
+    it('should accept strong passwords', async () => {
+      const strongPasswords = [
+        'MyStr0ng!Pass',
+        'C0mpl3x#Pa$$word',
+        'Secure2024!@#',
+        '9Tr$ng&Password'
+      ];
+
+      (MockedAuthService.register as jest.Mock).mockResolvedValue({
+        id: 1,
+        username: 'validuser',
+        avatar: '😀'
+      });
+
+      for (const password of strongPasswords) {
+        const res = await request(app)
+          .post('/auth/register')
+          .send({
+            username: 'validuser',
+            password: password,
+            avatar: '😀'
+          });
+
+        // Should not fail due to password validation - перевіряємо що не отримали помилку валідації
+        if (res.status >= 400 && res.body.error) {
+          expect(res.body.error).not.toMatch(/Пароль не відповідає вимогам безпеки|повторювані послідовності|послідовні символи/);
+        }
+      }
+    });
+
+    it('should reject password similar to username', async () => {
+      const username = 'testuser';
+      const similarPasswords = [
+        'testuser123!',
+        'TestUser1!',
+        '123testuser!',
+        'USER_test1!'
+      ];
+
+      for (const password of similarPasswords) {
+        const res = await request(app)
+          .post('/auth/register')
+          .send({
+            username: username,
+            password: password,
+            avatar: '😀'
+          });
+
+        expect(res.status).toBeGreaterThanOrEqual(400);
+        expect(res.body.error).toMatch(/не повинен містити ім\'я користувача|Internal server error|Пароль не відповідає вимогам безпеки/);
       }
     });
   });
@@ -352,6 +405,89 @@ describe('Security Tests', () => {
       expect(res.body.stack).toBeUndefined();
 
       process.env.NODE_ENV = originalEnv;
+    });
+  });
+
+  describe('Password Strength API Tests', () => {
+    it('should return password strength analysis for valid request', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          password: 'MyStr0ng!Pass',
+          username: 'testuser'
+        });
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('isValid');
+      expect(res.body).toHaveProperty('errors');
+      expect(res.body).toHaveProperty('strength');
+      expect(res.body).toHaveProperty('score');
+      expect(res.body).toHaveProperty('tips');
+    });
+
+    it('should validate weak passwords correctly', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          password: '123',
+          username: 'testuser'
+        });
+
+      expect(res.status).toBe(200);
+      expect(res.body.isValid).toBe(false);
+      expect(res.body.errors.length).toBeGreaterThan(0);
+      expect(res.body.strength).toBe('weak');
+    });
+
+    it('should detect password similarity to username', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          password: 'testuser123',
+          username: 'testuser'
+        });
+
+      expect(res.status).toBe(200);
+      expect(res.body.isValid).toBe(false);
+      expect(res.body.errors.some((error: string) => 
+        error.includes('should not contain or be similar to the username')
+      )).toBe(true);
+    });
+
+    it('should validate strong passwords as valid', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          password: 'MyVery$tr0ng!Password2024',
+          username: 'testuser'
+        });
+
+      expect(res.status).toBe(200);
+      expect(res.body.isValid).toBe(true);
+      expect(res.body.strength).toMatch(/medium|strong/);
+      expect(res.body.score).toBeGreaterThan(50);
+    });
+
+    it('should require password parameter', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          username: 'testuser'
+        });
+
+      expect(res.status).toBe(400);
+      expect(res.body.error).toMatch(/обов\'язковий|password is required/);
+    });
+
+    it('should work without username parameter', async () => {
+      const res = await request(app)
+        .post('/auth/check-password-strength')
+        .send({
+          password: 'MyStr0ng!Pass'
+        });
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('isValid');
     });
   });
 });

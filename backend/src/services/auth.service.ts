@@ -5,6 +5,7 @@ import { UserRepository } from '../repositories/user.repository';
 import { ConflictError, AuthenticationError, ValidationError } from '../errors/AppError';
 import { Config } from '../config/config';
 import { prisma } from '../db';
+import { PasswordValidator } from '../utils/password-validator';
 
 export class AuthService {
   // Generate access and refresh token pair
@@ -27,6 +28,17 @@ export class AuthService {
   static async register(username: string, password: string, avatar: string) {
     if (!username || !password || !avatar) {
       throw new ValidationError('Username, password and avatar are required');
+    }
+
+    // Password strength validation
+    const passwordValidation = PasswordValidator.validate(password);
+    if (!passwordValidation.isValid) {
+      throw new ValidationError(`Password does not meet security requirements: ${passwordValidation.errors.join(', ')}`);
+    }
+
+    // Check password similarity to username
+    if (PasswordValidator.isPasswordSimilarToUsername(password, username)) {
+      throw new ValidationError('Password should not contain or be similar to the username');
     }
 
     const existing = await UserRepository.findByUsername(username);

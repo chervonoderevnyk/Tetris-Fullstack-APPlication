@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { DeleteAccountModalComponent, FarewellModalComponent } from '../modals';
+import { AuthService } from '../../../services/auth.service';
+import { DeleteAccountModalComponent, FarewellModalComponent } from '../../modals';
 
 @Component({
   selector: 'app-header',

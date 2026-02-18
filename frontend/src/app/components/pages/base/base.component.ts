@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { GameBoardComponent } from "../game-board/game-board.component";
-import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
+import { GameBoardComponent } from "../../game/game-board/game-board.component";
+import { HeaderComponent } from "../../shared/header/header.component";
+import { FooterComponent } from "../../shared/footer/footer.component";
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-base',

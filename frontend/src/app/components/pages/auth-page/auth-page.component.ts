@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { PasswordValidationService } from '../services/password-validation.service';
+import { AuthService } from '../../../services/auth.service';
+import { PasswordValidationService } from '../../../services/password-validation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { availableAvatars } from '../../assets/emoji-avatars';
-import { PasswordStrengthComponent } from '../components/password-strength/password-strength.component';
+import { availableAvatars } from '../../../../assets/emoji-avatars';
+import { PasswordStrengthComponent } from '../../shared/password-strength/password-strength.component';
 
 @Component({
   selector: 'app-auth-page',
@@ -21,6 +21,7 @@ export class AuthPageComponent implements OnInit {
   isLoginMode: boolean = true;
   message: string = '';
   avatars = availableAvatars; // List of available avatars
+  showPassword: boolean = false;
 
   constructor(
     private authService: AuthService, 
@@ -75,5 +76,9 @@ export class AuthPageComponent implements OnInit {
 
   selectAvatar(avatar: string): void {
     this.selectedAvatar = avatar;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

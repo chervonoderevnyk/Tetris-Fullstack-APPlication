@@ -1,5 +1,5 @@
 /**
- * Правило валідації для перевірки полів запиту
+ * Validation rule for checking query fields
  */
 export interface ValidationRule {
   field: string;
@@ -10,4 +10,14 @@ export interface ValidationRule {
   min?: number;
   max?: number;
   pattern?: RegExp;
+}
+
+/**
+ * Password validation result
+ */
+export interface PasswordValidationResult {
+  isValid: boolean;
+  errors: string[];
+  strength: 'weak' | 'medium' | 'strong';
+  score: number; // 0-100
 }
