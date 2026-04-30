@@ -9,16 +9,6 @@
         <label for="password">Password: </label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required />
       </div>
-      
-      <!-- Компонент валідації пароля для режиму реєстрації -->
-      <app-password-strength 
-        *ngIf="!isLoginMode"
-        [password]="password"
-        [username]="username"
-        [showTips]="true"
-        [showGenerator]="true"
-        (passwordGenerated)="onPasswordGenerated($event)">
-      </app-password-strength>
       <div *ngIf="!isLoginMode">
         <label for="avatar">Choose avatar:</label>
         <div class="avatar-list">

@@ -1,12 +1,20 @@
 import { ScoreRepository } from '../repositories/score.repository';
 import { ValidationError, NotFoundError } from '../errors/AppError';
+import { GameValidationService } from './game-validation.service';
 
 export class ScoreService {
-  // Save new game result
-  static async saveScore(userId: number, score: number, level: number) {
-    if (!userId || score < 0 || level < 1) {
-      throw new ValidationError('Invalid score data provided');
+  // Save new game result with comprehensive validation
+  static async saveScore(userId: number, score: number, level: number, gameStartTime?: Date) {
+    if (!userId) {
+      throw new ValidationError('User ID is required');
     }
+
+    // Enhanced game result validation
+    GameValidationService.validateGameResult(score, level, gameStartTime);
+
+    // Check recent scores for suspicious patterns
+    const recentScores = await ScoreRepository.findUserRecentScores(userId, 10);
+    GameValidationService.checkSuspiciousPatterns(userId, recentScores);
 
     return ScoreRepository.create({
       userId,

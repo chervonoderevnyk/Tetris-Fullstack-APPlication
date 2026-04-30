@@ -10,6 +10,7 @@ import { securityHeadersMiddleware } from './middlewares/security.middleware';
 import { generalRateLimit } from './middlewares/rate-limit.middleware';
 import authRoutes from './routes/auth.routes';
 import scoresRoutes from './routes/scores.routes';
+import { SecurityController } from './controllers/security.controller';
 import { securityLogger } from './utils/security-logger';
 
 // Validate configuration on startup
@@ -76,6 +77,10 @@ app.get('/protected', authenticateToken, (req, res) => {
 // API routes
 app.use('/auth', authRoutes);
 app.use('/scores', scoresRoutes);
+
+// Admin routes (require authentication)
+app.get('/admin/security/suspicious-users', authenticateToken, SecurityController.getSuspiciousUsers);
+app.get('/admin/security/user/:userId/attempts', authenticateToken, SecurityController.getUserSuspiciousAttempts);
 
 // Error handling middleware (must be last)
 app.use(errorHandler);
