@@ -57,6 +57,19 @@ export class ScoreRepository {
     });
   }
 
+  static async findUserRecentScores(userId: number, limit: number = 10) {
+    return prisma.score.findMany({
+      where: { userId },
+      orderBy: { playedAt: 'desc' },
+      take: limit,
+      select: {
+        score: true,
+        level: true,
+        playedAt: true
+      }
+    });
+  }
+
   static async getUserScoreStats(userId: number) {
     const [totalGames, bestScore, averageScore, maxLevel] = await Promise.all([
       prisma.score.count({ where: { userId } }),

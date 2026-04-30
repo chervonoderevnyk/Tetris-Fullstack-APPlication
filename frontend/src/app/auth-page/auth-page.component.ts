@@ -5,12 +5,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { availableAvatars } from '../../assets/emoji-avatars';
-import { PasswordStrengthComponent } from '../components/password-strength/password-strength.component';
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, PasswordStrengthComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss']
 })

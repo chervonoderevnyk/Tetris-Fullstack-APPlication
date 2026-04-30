@@ -6,10 +6,13 @@ export class ScoreController {
   // Save game result (requires authentication)
   static async saveScore(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { score, level } = req.body;
+      const { score, level, gameStartTime } = req.body;
       const userId = req.userId!;
 
-      const savedScore = await ScoreService.saveScore(userId, score, level);
+      // Convert gameStartTime string to Date if provided
+      const startTime = gameStartTime ? new Date(gameStartTime) : undefined;
+
+      const savedScore = await ScoreService.saveScore(userId, score, level, startTime);
       res.status(201).json(savedScore);
     } catch (error) {
       next(error);
