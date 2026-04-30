@@ -22,8 +22,9 @@ export class ScoreController {
   // Get leaderboard (public access)
   static async getLeaderboard(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      const page = parseInt(req.query.page as string) || 1;
       const limit = parseInt(req.query.limit as string) || 10;
-      const leaderboard = await ScoreService.getLeaderboard(limit);
+      const leaderboard = await ScoreService.getLeaderboard(page, limit);
       res.json(leaderboard);
     } catch (error) {
       next(error);

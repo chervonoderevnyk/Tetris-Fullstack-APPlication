@@ -140,7 +140,7 @@ export class AuthController {
   }
 
   // Check authentication status (will try to use refresh token if available)
-  static async status(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async status(req: Request, res: Response, _next: NextFunction): Promise<void> {
     try {
       const refreshToken = CookieMiddleware.getRefreshTokenFromCookie(req);
       
@@ -168,24 +168,17 @@ export class AuthController {
   }
 
   // Delete user account with password confirmation
-  static async deleteAccount(req: AuthRequest, res: Response): Promise<void> {
+  static async deleteAccount(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.userId!;
       const { password } = req.body;
       const clientIp = req.ip || req.socket.remoteAddress || 'unknown';
       const userAgent = req.get('User-Agent') || 'unknown';
 
-      if (!password) {
-        res.status(400).json({ error: 'Password is required to delete account' });
-        return;
-      }
-
       const deletedUser = await AuthService.deleteAccount(userId, password);
-      
-      // Clear refresh token cookie
+
       CookieMiddleware.clearRefreshTokenCookie(res);
-      
-      // Log account deletion for security audit
+
       securityLogger.logEvent({
         type: SecurityEventType.ACCOUNT_DELETED,
         ip: clientIp,
@@ -195,17 +188,15 @@ export class AuthController {
         severity: 'medium'
       });
 
-      res.json({ 
+      res.json({
         message: 'Account deleted successfully',
-        user: { 
-          id: deletedUser.id, 
-          username: deletedUser.username 
+        user: {
+          id: deletedUser.id,
+          username: deletedUser.username
         }
       });
-
-    } catch (error: any) {
-      console.error('Delete account error:', error);
-      res.status(400).json({ error: error.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -236,9 +227,8 @@ export class AuthController {
         tips: PasswordValidator.generatePasswordTips()
       });
 
-    } catch (error: any) {
-      console.error('Password strength check error:', error);
-      res.status(500).json({ error: 'Error checking password strength' });
+    } catch (error) {
+      next(error);
     }
   }
 }

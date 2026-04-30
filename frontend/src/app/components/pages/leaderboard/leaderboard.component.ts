@@ -18,6 +18,11 @@ export class LeaderboardComponent implements OnInit {
   loading = false;
   error: string | null = null;
 
+  page = 1;
+  totalPages = 1;
+  total = 0;
+  readonly limit = 10;
+
   constructor(
     private scoreService: ScoreService,
     private router: Router
@@ -31,39 +36,51 @@ export class LeaderboardComponent implements OnInit {
 
   loadLeaderboard() {
     this.loading = true;
-    this.scoreService.getLeaderboard().subscribe({
-      next: (data) => {
-        this.leaderboard = data;
+    this.error = null;
+    this.scoreService.getLeaderboard(this.page, this.limit).subscribe({
+      next: (response) => {
+        this.leaderboard = response.data;
+        this.total = response.total;
+        this.totalPages = response.totalPages;
         this.loading = false;
       },
-      error: (err) => {
-        console.error('Leaderboard loading error:', err);
+      error: () => {
         this.error = 'Failed to load leaderboard';
         this.loading = false;
       }
     });
   }
 
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.loadLeaderboard();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.loadLeaderboard();
+    }
+  }
+
   loadUserStats() {
     this.scoreService.getUserStats().subscribe({
-      next: (data) => {
-        this.userStats = data;
-      },
-      error: (err) => {
-        console.error('Statistics loading error:', err);
-      }
+      next: (data) => { this.userStats = data; },
+      error: () => {}
     });
   }
 
   loadUserRanking() {
     this.scoreService.getUserRanking().subscribe({
-      next: (data) => {
-        this.userRanking = data;
-      },
-      error: (err) => {
-        console.error('Ranking loading error:', err);
-      }
+      next: (data) => { this.userRanking = data; },
+      error: () => {}
     });
+  }
+
+  globalRank(index: number): number {
+    return (this.page - 1) * this.limit + index + 1;
   }
 
   goBack() {
@@ -81,10 +98,11 @@ export class LeaderboardComponent implements OnInit {
   }
 
   getRankEmoji(index: number): string {
-    switch (index) {
-      case 0: return '🥇';
-      case 1: return '🥈';
-      case 2: return '🥉';
+    const rank = this.globalRank(index);
+    switch (rank) {
+      case 1: return '🥇';
+      case 2: return '🥈';
+      case 3: return '🥉';
       default: return '🏅';
     }
   }

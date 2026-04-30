@@ -43,3 +43,13 @@ export interface UserRanking {
   score: number;
   level: number;
 }
+
+/**
+ * Paginated leaderboard response
+ */
+export interface LeaderboardPage {
+  data: LeaderboardEntry[];
+  total: number;
+  page: number;
+  totalPages: number;
+}

@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Score = $Result.DefaultSelection<Prisma.$ScorePayload>
+/**
+ * Model SuspiciousAttempt
+ * 
+ */
+export type SuspiciousAttempt = $Result.DefaultSelection<Prisma.$SuspiciousAttemptPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get score(): Prisma.ScoreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.suspiciousAttempt`: Exposes CRUD operations for the **SuspiciousAttempt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SuspiciousAttempts
+    * const suspiciousAttempts = await prisma.suspiciousAttempt.findMany()
+    * ```
+    */
+  get suspiciousAttempt(): Prisma.SuspiciousAttemptDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Score: 'Score'
+    Score: 'Score',
+    SuspiciousAttempt: 'SuspiciousAttempt'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "score"
+      modelProps: "user" | "score" | "suspiciousAttempt"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +796,80 @@ export namespace Prisma {
           }
         }
       }
+      SuspiciousAttempt: {
+        payload: Prisma.$SuspiciousAttemptPayload<ExtArgs>
+        fields: Prisma.SuspiciousAttemptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SuspiciousAttemptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SuspiciousAttemptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          findFirst: {
+            args: Prisma.SuspiciousAttemptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SuspiciousAttemptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          findMany: {
+            args: Prisma.SuspiciousAttemptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>[]
+          }
+          create: {
+            args: Prisma.SuspiciousAttemptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          createMany: {
+            args: Prisma.SuspiciousAttemptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SuspiciousAttemptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>[]
+          }
+          delete: {
+            args: Prisma.SuspiciousAttemptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          update: {
+            args: Prisma.SuspiciousAttemptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          deleteMany: {
+            args: Prisma.SuspiciousAttemptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SuspiciousAttemptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SuspiciousAttemptUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>[]
+          }
+          upsert: {
+            args: Prisma.SuspiciousAttemptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuspiciousAttemptPayload>
+          }
+          aggregate: {
+            args: Prisma.SuspiciousAttemptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSuspiciousAttempt>
+          }
+          groupBy: {
+            args: Prisma.SuspiciousAttemptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SuspiciousAttemptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SuspiciousAttemptCountArgs<ExtArgs>
+            result: $Utils.Optional<SuspiciousAttemptCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     score?: ScoreOmit
+    suspiciousAttempt?: SuspiciousAttemptOmit
   }
 
   /* Types for Logging */
@@ -961,10 +1052,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     scores: number
+    suspiciousAttempts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     scores?: boolean | UserCountOutputTypeCountScoresArgs
+    suspiciousAttempts?: boolean | UserCountOutputTypeCountSuspiciousAttemptsArgs
   }
 
   // Custom InputTypes
@@ -983,6 +1076,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScoreWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSuspiciousAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuspiciousAttemptWhereInput
   }
 
 
@@ -1197,6 +1297,7 @@ export namespace Prisma {
     avatar?: boolean
     refreshToken?: boolean
     scores?: boolean | User$scoresArgs<ExtArgs>
+    suspiciousAttempts?: boolean | User$suspiciousAttemptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1230,6 +1331,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "createdAt" | "avatar" | "refreshToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     scores?: boolean | User$scoresArgs<ExtArgs>
+    suspiciousAttempts?: boolean | User$suspiciousAttemptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1239,6 +1341,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       scores: Prisma.$ScorePayload<ExtArgs>[]
+      suspiciousAttempts: Prisma.$SuspiciousAttemptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1642,6 +1745,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     scores<T extends User$scoresArgs<ExtArgs> = {}>(args?: Subset<T, User$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    suspiciousAttempts<T extends User$suspiciousAttemptsArgs<ExtArgs> = {}>(args?: Subset<T, User$suspiciousAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2086,6 +2190,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ScoreScalarFieldEnum | ScoreScalarFieldEnum[]
+  }
+
+  /**
+   * User.suspiciousAttempts
+   */
+  export type User$suspiciousAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    where?: SuspiciousAttemptWhereInput
+    orderBy?: SuspiciousAttemptOrderByWithRelationInput | SuspiciousAttemptOrderByWithRelationInput[]
+    cursor?: SuspiciousAttemptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuspiciousAttemptScalarFieldEnum | SuspiciousAttemptScalarFieldEnum[]
   }
 
   /**
@@ -3212,6 +3340,1123 @@ export namespace Prisma {
 
 
   /**
+   * Model SuspiciousAttempt
+   */
+
+  export type AggregateSuspiciousAttempt = {
+    _count: SuspiciousAttemptCountAggregateOutputType | null
+    _avg: SuspiciousAttemptAvgAggregateOutputType | null
+    _sum: SuspiciousAttemptSumAggregateOutputType | null
+    _min: SuspiciousAttemptMinAggregateOutputType | null
+    _max: SuspiciousAttemptMaxAggregateOutputType | null
+  }
+
+  export type SuspiciousAttemptAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    score: number | null
+    level: number | null
+  }
+
+  export type SuspiciousAttemptSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    score: number | null
+    level: number | null
+  }
+
+  export type SuspiciousAttemptMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    score: number | null
+    level: number | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type SuspiciousAttemptMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    score: number | null
+    level: number | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type SuspiciousAttemptCountAggregateOutputType = {
+    id: number
+    userId: number
+    score: number
+    level: number
+    reason: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SuspiciousAttemptAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    score?: true
+    level?: true
+  }
+
+  export type SuspiciousAttemptSumAggregateInputType = {
+    id?: true
+    userId?: true
+    score?: true
+    level?: true
+  }
+
+  export type SuspiciousAttemptMinAggregateInputType = {
+    id?: true
+    userId?: true
+    score?: true
+    level?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type SuspiciousAttemptMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    score?: true
+    level?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type SuspiciousAttemptCountAggregateInputType = {
+    id?: true
+    userId?: true
+    score?: true
+    level?: true
+    reason?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SuspiciousAttemptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SuspiciousAttempt to aggregate.
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuspiciousAttempts to fetch.
+     */
+    orderBy?: SuspiciousAttemptOrderByWithRelationInput | SuspiciousAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SuspiciousAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuspiciousAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuspiciousAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SuspiciousAttempts
+    **/
+    _count?: true | SuspiciousAttemptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SuspiciousAttemptAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SuspiciousAttemptSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SuspiciousAttemptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SuspiciousAttemptMaxAggregateInputType
+  }
+
+  export type GetSuspiciousAttemptAggregateType<T extends SuspiciousAttemptAggregateArgs> = {
+        [P in keyof T & keyof AggregateSuspiciousAttempt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSuspiciousAttempt[P]>
+      : GetScalarType<T[P], AggregateSuspiciousAttempt[P]>
+  }
+
+
+
+
+  export type SuspiciousAttemptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuspiciousAttemptWhereInput
+    orderBy?: SuspiciousAttemptOrderByWithAggregationInput | SuspiciousAttemptOrderByWithAggregationInput[]
+    by: SuspiciousAttemptScalarFieldEnum[] | SuspiciousAttemptScalarFieldEnum
+    having?: SuspiciousAttemptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SuspiciousAttemptCountAggregateInputType | true
+    _avg?: SuspiciousAttemptAvgAggregateInputType
+    _sum?: SuspiciousAttemptSumAggregateInputType
+    _min?: SuspiciousAttemptMinAggregateInputType
+    _max?: SuspiciousAttemptMaxAggregateInputType
+  }
+
+  export type SuspiciousAttemptGroupByOutputType = {
+    id: number
+    userId: number
+    score: number
+    level: number
+    reason: string
+    createdAt: Date
+    _count: SuspiciousAttemptCountAggregateOutputType | null
+    _avg: SuspiciousAttemptAvgAggregateOutputType | null
+    _sum: SuspiciousAttemptSumAggregateOutputType | null
+    _min: SuspiciousAttemptMinAggregateOutputType | null
+    _max: SuspiciousAttemptMaxAggregateOutputType | null
+  }
+
+  type GetSuspiciousAttemptGroupByPayload<T extends SuspiciousAttemptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SuspiciousAttemptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SuspiciousAttemptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SuspiciousAttemptGroupByOutputType[P]>
+            : GetScalarType<T[P], SuspiciousAttemptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SuspiciousAttemptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    score?: boolean
+    level?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["suspiciousAttempt"]>
+
+  export type SuspiciousAttemptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    score?: boolean
+    level?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["suspiciousAttempt"]>
+
+  export type SuspiciousAttemptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    score?: boolean
+    level?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["suspiciousAttempt"]>
+
+  export type SuspiciousAttemptSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    score?: boolean
+    level?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }
+
+  export type SuspiciousAttemptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "score" | "level" | "reason" | "createdAt", ExtArgs["result"]["suspiciousAttempt"]>
+  export type SuspiciousAttemptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SuspiciousAttemptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SuspiciousAttemptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SuspiciousAttemptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SuspiciousAttempt"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      score: number
+      level: number
+      reason: string
+      createdAt: Date
+    }, ExtArgs["result"]["suspiciousAttempt"]>
+    composites: {}
+  }
+
+  type SuspiciousAttemptGetPayload<S extends boolean | null | undefined | SuspiciousAttemptDefaultArgs> = $Result.GetResult<Prisma.$SuspiciousAttemptPayload, S>
+
+  type SuspiciousAttemptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SuspiciousAttemptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SuspiciousAttemptCountAggregateInputType | true
+    }
+
+  export interface SuspiciousAttemptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SuspiciousAttempt'], meta: { name: 'SuspiciousAttempt' } }
+    /**
+     * Find zero or one SuspiciousAttempt that matches the filter.
+     * @param {SuspiciousAttemptFindUniqueArgs} args - Arguments to find a SuspiciousAttempt
+     * @example
+     * // Get one SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SuspiciousAttemptFindUniqueArgs>(args: SelectSubset<T, SuspiciousAttemptFindUniqueArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SuspiciousAttempt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SuspiciousAttemptFindUniqueOrThrowArgs} args - Arguments to find a SuspiciousAttempt
+     * @example
+     * // Get one SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SuspiciousAttemptFindUniqueOrThrowArgs>(args: SelectSubset<T, SuspiciousAttemptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SuspiciousAttempt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptFindFirstArgs} args - Arguments to find a SuspiciousAttempt
+     * @example
+     * // Get one SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SuspiciousAttemptFindFirstArgs>(args?: SelectSubset<T, SuspiciousAttemptFindFirstArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SuspiciousAttempt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptFindFirstOrThrowArgs} args - Arguments to find a SuspiciousAttempt
+     * @example
+     * // Get one SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SuspiciousAttemptFindFirstOrThrowArgs>(args?: SelectSubset<T, SuspiciousAttemptFindFirstOrThrowArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SuspiciousAttempts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SuspiciousAttempts
+     * const suspiciousAttempts = await prisma.suspiciousAttempt.findMany()
+     * 
+     * // Get first 10 SuspiciousAttempts
+     * const suspiciousAttempts = await prisma.suspiciousAttempt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const suspiciousAttemptWithIdOnly = await prisma.suspiciousAttempt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SuspiciousAttemptFindManyArgs>(args?: SelectSubset<T, SuspiciousAttemptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SuspiciousAttempt.
+     * @param {SuspiciousAttemptCreateArgs} args - Arguments to create a SuspiciousAttempt.
+     * @example
+     * // Create one SuspiciousAttempt
+     * const SuspiciousAttempt = await prisma.suspiciousAttempt.create({
+     *   data: {
+     *     // ... data to create a SuspiciousAttempt
+     *   }
+     * })
+     * 
+     */
+    create<T extends SuspiciousAttemptCreateArgs>(args: SelectSubset<T, SuspiciousAttemptCreateArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SuspiciousAttempts.
+     * @param {SuspiciousAttemptCreateManyArgs} args - Arguments to create many SuspiciousAttempts.
+     * @example
+     * // Create many SuspiciousAttempts
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SuspiciousAttemptCreateManyArgs>(args?: SelectSubset<T, SuspiciousAttemptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SuspiciousAttempts and returns the data saved in the database.
+     * @param {SuspiciousAttemptCreateManyAndReturnArgs} args - Arguments to create many SuspiciousAttempts.
+     * @example
+     * // Create many SuspiciousAttempts
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SuspiciousAttempts and only return the `id`
+     * const suspiciousAttemptWithIdOnly = await prisma.suspiciousAttempt.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SuspiciousAttemptCreateManyAndReturnArgs>(args?: SelectSubset<T, SuspiciousAttemptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SuspiciousAttempt.
+     * @param {SuspiciousAttemptDeleteArgs} args - Arguments to delete one SuspiciousAttempt.
+     * @example
+     * // Delete one SuspiciousAttempt
+     * const SuspiciousAttempt = await prisma.suspiciousAttempt.delete({
+     *   where: {
+     *     // ... filter to delete one SuspiciousAttempt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SuspiciousAttemptDeleteArgs>(args: SelectSubset<T, SuspiciousAttemptDeleteArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SuspiciousAttempt.
+     * @param {SuspiciousAttemptUpdateArgs} args - Arguments to update one SuspiciousAttempt.
+     * @example
+     * // Update one SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SuspiciousAttemptUpdateArgs>(args: SelectSubset<T, SuspiciousAttemptUpdateArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SuspiciousAttempts.
+     * @param {SuspiciousAttemptDeleteManyArgs} args - Arguments to filter SuspiciousAttempts to delete.
+     * @example
+     * // Delete a few SuspiciousAttempts
+     * const { count } = await prisma.suspiciousAttempt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SuspiciousAttemptDeleteManyArgs>(args?: SelectSubset<T, SuspiciousAttemptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SuspiciousAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SuspiciousAttempts
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SuspiciousAttemptUpdateManyArgs>(args: SelectSubset<T, SuspiciousAttemptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SuspiciousAttempts and returns the data updated in the database.
+     * @param {SuspiciousAttemptUpdateManyAndReturnArgs} args - Arguments to update many SuspiciousAttempts.
+     * @example
+     * // Update many SuspiciousAttempts
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SuspiciousAttempts and only return the `id`
+     * const suspiciousAttemptWithIdOnly = await prisma.suspiciousAttempt.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SuspiciousAttemptUpdateManyAndReturnArgs>(args: SelectSubset<T, SuspiciousAttemptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SuspiciousAttempt.
+     * @param {SuspiciousAttemptUpsertArgs} args - Arguments to update or create a SuspiciousAttempt.
+     * @example
+     * // Update or create a SuspiciousAttempt
+     * const suspiciousAttempt = await prisma.suspiciousAttempt.upsert({
+     *   create: {
+     *     // ... data to create a SuspiciousAttempt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SuspiciousAttempt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SuspiciousAttemptUpsertArgs>(args: SelectSubset<T, SuspiciousAttemptUpsertArgs<ExtArgs>>): Prisma__SuspiciousAttemptClient<$Result.GetResult<Prisma.$SuspiciousAttemptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SuspiciousAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptCountArgs} args - Arguments to filter SuspiciousAttempts to count.
+     * @example
+     * // Count the number of SuspiciousAttempts
+     * const count = await prisma.suspiciousAttempt.count({
+     *   where: {
+     *     // ... the filter for the SuspiciousAttempts we want to count
+     *   }
+     * })
+    **/
+    count<T extends SuspiciousAttemptCountArgs>(
+      args?: Subset<T, SuspiciousAttemptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SuspiciousAttemptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SuspiciousAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SuspiciousAttemptAggregateArgs>(args: Subset<T, SuspiciousAttemptAggregateArgs>): Prisma.PrismaPromise<GetSuspiciousAttemptAggregateType<T>>
+
+    /**
+     * Group by SuspiciousAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuspiciousAttemptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SuspiciousAttemptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SuspiciousAttemptGroupByArgs['orderBy'] }
+        : { orderBy?: SuspiciousAttemptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SuspiciousAttemptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSuspiciousAttemptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SuspiciousAttempt model
+   */
+  readonly fields: SuspiciousAttemptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SuspiciousAttempt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SuspiciousAttemptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SuspiciousAttempt model
+   */
+  interface SuspiciousAttemptFieldRefs {
+    readonly id: FieldRef<"SuspiciousAttempt", 'Int'>
+    readonly userId: FieldRef<"SuspiciousAttempt", 'Int'>
+    readonly score: FieldRef<"SuspiciousAttempt", 'Int'>
+    readonly level: FieldRef<"SuspiciousAttempt", 'Int'>
+    readonly reason: FieldRef<"SuspiciousAttempt", 'String'>
+    readonly createdAt: FieldRef<"SuspiciousAttempt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SuspiciousAttempt findUnique
+   */
+  export type SuspiciousAttemptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which SuspiciousAttempt to fetch.
+     */
+    where: SuspiciousAttemptWhereUniqueInput
+  }
+
+  /**
+   * SuspiciousAttempt findUniqueOrThrow
+   */
+  export type SuspiciousAttemptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which SuspiciousAttempt to fetch.
+     */
+    where: SuspiciousAttemptWhereUniqueInput
+  }
+
+  /**
+   * SuspiciousAttempt findFirst
+   */
+  export type SuspiciousAttemptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which SuspiciousAttempt to fetch.
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuspiciousAttempts to fetch.
+     */
+    orderBy?: SuspiciousAttemptOrderByWithRelationInput | SuspiciousAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SuspiciousAttempts.
+     */
+    cursor?: SuspiciousAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuspiciousAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuspiciousAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SuspiciousAttempts.
+     */
+    distinct?: SuspiciousAttemptScalarFieldEnum | SuspiciousAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * SuspiciousAttempt findFirstOrThrow
+   */
+  export type SuspiciousAttemptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which SuspiciousAttempt to fetch.
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuspiciousAttempts to fetch.
+     */
+    orderBy?: SuspiciousAttemptOrderByWithRelationInput | SuspiciousAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SuspiciousAttempts.
+     */
+    cursor?: SuspiciousAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuspiciousAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuspiciousAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SuspiciousAttempts.
+     */
+    distinct?: SuspiciousAttemptScalarFieldEnum | SuspiciousAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * SuspiciousAttempt findMany
+   */
+  export type SuspiciousAttemptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which SuspiciousAttempts to fetch.
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuspiciousAttempts to fetch.
+     */
+    orderBy?: SuspiciousAttemptOrderByWithRelationInput | SuspiciousAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SuspiciousAttempts.
+     */
+    cursor?: SuspiciousAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuspiciousAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuspiciousAttempts.
+     */
+    skip?: number
+    distinct?: SuspiciousAttemptScalarFieldEnum | SuspiciousAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * SuspiciousAttempt create
+   */
+  export type SuspiciousAttemptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SuspiciousAttempt.
+     */
+    data: XOR<SuspiciousAttemptCreateInput, SuspiciousAttemptUncheckedCreateInput>
+  }
+
+  /**
+   * SuspiciousAttempt createMany
+   */
+  export type SuspiciousAttemptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SuspiciousAttempts.
+     */
+    data: SuspiciousAttemptCreateManyInput | SuspiciousAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SuspiciousAttempt createManyAndReturn
+   */
+  export type SuspiciousAttemptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * The data used to create many SuspiciousAttempts.
+     */
+    data: SuspiciousAttemptCreateManyInput | SuspiciousAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SuspiciousAttempt update
+   */
+  export type SuspiciousAttemptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SuspiciousAttempt.
+     */
+    data: XOR<SuspiciousAttemptUpdateInput, SuspiciousAttemptUncheckedUpdateInput>
+    /**
+     * Choose, which SuspiciousAttempt to update.
+     */
+    where: SuspiciousAttemptWhereUniqueInput
+  }
+
+  /**
+   * SuspiciousAttempt updateMany
+   */
+  export type SuspiciousAttemptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SuspiciousAttempts.
+     */
+    data: XOR<SuspiciousAttemptUpdateManyMutationInput, SuspiciousAttemptUncheckedUpdateManyInput>
+    /**
+     * Filter which SuspiciousAttempts to update
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * Limit how many SuspiciousAttempts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SuspiciousAttempt updateManyAndReturn
+   */
+  export type SuspiciousAttemptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * The data used to update SuspiciousAttempts.
+     */
+    data: XOR<SuspiciousAttemptUpdateManyMutationInput, SuspiciousAttemptUncheckedUpdateManyInput>
+    /**
+     * Filter which SuspiciousAttempts to update
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * Limit how many SuspiciousAttempts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SuspiciousAttempt upsert
+   */
+  export type SuspiciousAttemptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SuspiciousAttempt to update in case it exists.
+     */
+    where: SuspiciousAttemptWhereUniqueInput
+    /**
+     * In case the SuspiciousAttempt found by the `where` argument doesn't exist, create a new SuspiciousAttempt with this data.
+     */
+    create: XOR<SuspiciousAttemptCreateInput, SuspiciousAttemptUncheckedCreateInput>
+    /**
+     * In case the SuspiciousAttempt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SuspiciousAttemptUpdateInput, SuspiciousAttemptUncheckedUpdateInput>
+  }
+
+  /**
+   * SuspiciousAttempt delete
+   */
+  export type SuspiciousAttemptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+    /**
+     * Filter which SuspiciousAttempt to delete.
+     */
+    where: SuspiciousAttemptWhereUniqueInput
+  }
+
+  /**
+   * SuspiciousAttempt deleteMany
+   */
+  export type SuspiciousAttemptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SuspiciousAttempts to delete
+     */
+    where?: SuspiciousAttemptWhereInput
+    /**
+     * Limit how many SuspiciousAttempts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SuspiciousAttempt without action
+   */
+  export type SuspiciousAttemptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuspiciousAttempt
+     */
+    select?: SuspiciousAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuspiciousAttempt
+     */
+    omit?: SuspiciousAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuspiciousAttemptInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3246,6 +4491,18 @@ export namespace Prisma {
   };
 
   export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
+
+
+  export const SuspiciousAttemptScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    score: 'score',
+    level: 'level',
+    reason: 'reason',
+    createdAt: 'createdAt'
+  };
+
+  export type SuspiciousAttemptScalarFieldEnum = (typeof SuspiciousAttemptScalarFieldEnum)[keyof typeof SuspiciousAttemptScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3347,6 +4604,7 @@ export namespace Prisma {
     avatar?: StringFilter<"User"> | string
     refreshToken?: StringNullableFilter<"User"> | string | null
     scores?: ScoreListRelationFilter
+    suspiciousAttempts?: SuspiciousAttemptListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3357,6 +4615,7 @@ export namespace Prisma {
     avatar?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     scores?: ScoreOrderByRelationAggregateInput
+    suspiciousAttempts?: SuspiciousAttemptOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3370,6 +4629,7 @@ export namespace Prisma {
     avatar?: StringFilter<"User"> | string
     refreshToken?: StringNullableFilter<"User"> | string | null
     scores?: ScoreListRelationFilter
+    suspiciousAttempts?: SuspiciousAttemptListRelationFilter
   }, "id" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -3455,6 +4715,68 @@ export namespace Prisma {
     playedAt?: DateTimeWithAggregatesFilter<"Score"> | Date | string
   }
 
+  export type SuspiciousAttemptWhereInput = {
+    AND?: SuspiciousAttemptWhereInput | SuspiciousAttemptWhereInput[]
+    OR?: SuspiciousAttemptWhereInput[]
+    NOT?: SuspiciousAttemptWhereInput | SuspiciousAttemptWhereInput[]
+    id?: IntFilter<"SuspiciousAttempt"> | number
+    userId?: IntFilter<"SuspiciousAttempt"> | number
+    score?: IntFilter<"SuspiciousAttempt"> | number
+    level?: IntFilter<"SuspiciousAttempt"> | number
+    reason?: StringFilter<"SuspiciousAttempt"> | string
+    createdAt?: DateTimeFilter<"SuspiciousAttempt"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SuspiciousAttemptOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SuspiciousAttemptWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: SuspiciousAttemptWhereInput | SuspiciousAttemptWhereInput[]
+    OR?: SuspiciousAttemptWhereInput[]
+    NOT?: SuspiciousAttemptWhereInput | SuspiciousAttemptWhereInput[]
+    userId?: IntFilter<"SuspiciousAttempt"> | number
+    score?: IntFilter<"SuspiciousAttempt"> | number
+    level?: IntFilter<"SuspiciousAttempt"> | number
+    reason?: StringFilter<"SuspiciousAttempt"> | string
+    createdAt?: DateTimeFilter<"SuspiciousAttempt"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type SuspiciousAttemptOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+    _count?: SuspiciousAttemptCountOrderByAggregateInput
+    _avg?: SuspiciousAttemptAvgOrderByAggregateInput
+    _max?: SuspiciousAttemptMaxOrderByAggregateInput
+    _min?: SuspiciousAttemptMinOrderByAggregateInput
+    _sum?: SuspiciousAttemptSumOrderByAggregateInput
+  }
+
+  export type SuspiciousAttemptScalarWhereWithAggregatesInput = {
+    AND?: SuspiciousAttemptScalarWhereWithAggregatesInput | SuspiciousAttemptScalarWhereWithAggregatesInput[]
+    OR?: SuspiciousAttemptScalarWhereWithAggregatesInput[]
+    NOT?: SuspiciousAttemptScalarWhereWithAggregatesInput | SuspiciousAttemptScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SuspiciousAttempt"> | number
+    userId?: IntWithAggregatesFilter<"SuspiciousAttempt"> | number
+    score?: IntWithAggregatesFilter<"SuspiciousAttempt"> | number
+    level?: IntWithAggregatesFilter<"SuspiciousAttempt"> | number
+    reason?: StringWithAggregatesFilter<"SuspiciousAttempt"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SuspiciousAttempt"> | Date | string
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
@@ -3462,6 +4784,7 @@ export namespace Prisma {
     avatar: string
     refreshToken?: string | null
     scores?: ScoreCreateNestedManyWithoutUserInput
+    suspiciousAttempts?: SuspiciousAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3472,6 +4795,7 @@ export namespace Prisma {
     avatar: string
     refreshToken?: string | null
     scores?: ScoreUncheckedCreateNestedManyWithoutUserInput
+    suspiciousAttempts?: SuspiciousAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3481,6 +4805,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     scores?: ScoreUpdateManyWithoutUserNestedInput
+    suspiciousAttempts?: SuspiciousAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3491,6 +4816,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     scores?: ScoreUncheckedUpdateManyWithoutUserNestedInput
+    suspiciousAttempts?: SuspiciousAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3571,6 +4897,65 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SuspiciousAttemptCreateInput = {
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutSuspiciousAttemptsInput
+  }
+
+  export type SuspiciousAttemptUncheckedCreateInput = {
+    id?: number
+    userId: number
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
+  }
+
+  export type SuspiciousAttemptUpdateInput = {
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSuspiciousAttemptsNestedInput
+  }
+
+  export type SuspiciousAttemptUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuspiciousAttemptCreateManyInput = {
+    id?: number
+    userId: number
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
+  }
+
+  export type SuspiciousAttemptUpdateManyMutationInput = {
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuspiciousAttemptUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3629,12 +5014,22 @@ export namespace Prisma {
     none?: ScoreWhereInput
   }
 
+  export type SuspiciousAttemptListRelationFilter = {
+    every?: SuspiciousAttemptWhereInput
+    some?: SuspiciousAttemptWhereInput
+    none?: SuspiciousAttemptWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type ScoreOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SuspiciousAttemptOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3782,6 +5177,47 @@ export namespace Prisma {
     level?: SortOrder
   }
 
+  export type SuspiciousAttemptCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SuspiciousAttemptAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+  }
+
+  export type SuspiciousAttemptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SuspiciousAttemptMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SuspiciousAttemptSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+  }
+
   export type ScoreCreateNestedManyWithoutUserInput = {
     create?: XOR<ScoreCreateWithoutUserInput, ScoreUncheckedCreateWithoutUserInput> | ScoreCreateWithoutUserInput[] | ScoreUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ScoreCreateOrConnectWithoutUserInput | ScoreCreateOrConnectWithoutUserInput[]
@@ -3789,11 +5225,25 @@ export namespace Prisma {
     connect?: ScoreWhereUniqueInput | ScoreWhereUniqueInput[]
   }
 
+  export type SuspiciousAttemptCreateNestedManyWithoutUserInput = {
+    create?: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput> | SuspiciousAttemptCreateWithoutUserInput[] | SuspiciousAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SuspiciousAttemptCreateOrConnectWithoutUserInput | SuspiciousAttemptCreateOrConnectWithoutUserInput[]
+    createMany?: SuspiciousAttemptCreateManyUserInputEnvelope
+    connect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+  }
+
   export type ScoreUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ScoreCreateWithoutUserInput, ScoreUncheckedCreateWithoutUserInput> | ScoreCreateWithoutUserInput[] | ScoreUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ScoreCreateOrConnectWithoutUserInput | ScoreCreateOrConnectWithoutUserInput[]
     createMany?: ScoreCreateManyUserInputEnvelope
     connect?: ScoreWhereUniqueInput | ScoreWhereUniqueInput[]
+  }
+
+  export type SuspiciousAttemptUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput> | SuspiciousAttemptCreateWithoutUserInput[] | SuspiciousAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SuspiciousAttemptCreateOrConnectWithoutUserInput | SuspiciousAttemptCreateOrConnectWithoutUserInput[]
+    createMany?: SuspiciousAttemptCreateManyUserInputEnvelope
+    connect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3822,6 +5272,20 @@ export namespace Prisma {
     deleteMany?: ScoreScalarWhereInput | ScoreScalarWhereInput[]
   }
 
+  export type SuspiciousAttemptUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput> | SuspiciousAttemptCreateWithoutUserInput[] | SuspiciousAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SuspiciousAttemptCreateOrConnectWithoutUserInput | SuspiciousAttemptCreateOrConnectWithoutUserInput[]
+    upsert?: SuspiciousAttemptUpsertWithWhereUniqueWithoutUserInput | SuspiciousAttemptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SuspiciousAttemptCreateManyUserInputEnvelope
+    set?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    disconnect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    delete?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    connect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    update?: SuspiciousAttemptUpdateWithWhereUniqueWithoutUserInput | SuspiciousAttemptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SuspiciousAttemptUpdateManyWithWhereWithoutUserInput | SuspiciousAttemptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SuspiciousAttemptScalarWhereInput | SuspiciousAttemptScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -3844,6 +5308,20 @@ export namespace Prisma {
     deleteMany?: ScoreScalarWhereInput | ScoreScalarWhereInput[]
   }
 
+  export type SuspiciousAttemptUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput> | SuspiciousAttemptCreateWithoutUserInput[] | SuspiciousAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SuspiciousAttemptCreateOrConnectWithoutUserInput | SuspiciousAttemptCreateOrConnectWithoutUserInput[]
+    upsert?: SuspiciousAttemptUpsertWithWhereUniqueWithoutUserInput | SuspiciousAttemptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SuspiciousAttemptCreateManyUserInputEnvelope
+    set?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    disconnect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    delete?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    connect?: SuspiciousAttemptWhereUniqueInput | SuspiciousAttemptWhereUniqueInput[]
+    update?: SuspiciousAttemptUpdateWithWhereUniqueWithoutUserInput | SuspiciousAttemptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SuspiciousAttemptUpdateManyWithWhereWithoutUserInput | SuspiciousAttemptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SuspiciousAttemptScalarWhereInput | SuspiciousAttemptScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutScoresInput = {
     create?: XOR<UserCreateWithoutScoresInput, UserUncheckedCreateWithoutScoresInput>
     connectOrCreate?: UserCreateOrConnectWithoutScoresInput
@@ -3856,6 +5334,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutScoresInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutScoresInput, UserUpdateWithoutScoresInput>, UserUncheckedUpdateWithoutScoresInput>
+  }
+
+  export type UserCreateNestedOneWithoutSuspiciousAttemptsInput = {
+    create?: XOR<UserCreateWithoutSuspiciousAttemptsInput, UserUncheckedCreateWithoutSuspiciousAttemptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSuspiciousAttemptsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSuspiciousAttemptsNestedInput = {
+    create?: XOR<UserCreateWithoutSuspiciousAttemptsInput, UserUncheckedCreateWithoutSuspiciousAttemptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSuspiciousAttemptsInput
+    upsert?: UserUpsertWithoutSuspiciousAttemptsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSuspiciousAttemptsInput, UserUpdateWithoutSuspiciousAttemptsInput>, UserUncheckedUpdateWithoutSuspiciousAttemptsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4017,6 +5509,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SuspiciousAttemptCreateWithoutUserInput = {
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
+  }
+
+  export type SuspiciousAttemptUncheckedCreateWithoutUserInput = {
+    id?: number
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
+  }
+
+  export type SuspiciousAttemptCreateOrConnectWithoutUserInput = {
+    where: SuspiciousAttemptWhereUniqueInput
+    create: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput>
+  }
+
+  export type SuspiciousAttemptCreateManyUserInputEnvelope = {
+    data: SuspiciousAttemptCreateManyUserInput | SuspiciousAttemptCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ScoreUpsertWithWhereUniqueWithoutUserInput = {
     where: ScoreWhereUniqueInput
     update: XOR<ScoreUpdateWithoutUserInput, ScoreUncheckedUpdateWithoutUserInput>
@@ -4044,12 +5561,41 @@ export namespace Prisma {
     playedAt?: DateTimeFilter<"Score"> | Date | string
   }
 
+  export type SuspiciousAttemptUpsertWithWhereUniqueWithoutUserInput = {
+    where: SuspiciousAttemptWhereUniqueInput
+    update: XOR<SuspiciousAttemptUpdateWithoutUserInput, SuspiciousAttemptUncheckedUpdateWithoutUserInput>
+    create: XOR<SuspiciousAttemptCreateWithoutUserInput, SuspiciousAttemptUncheckedCreateWithoutUserInput>
+  }
+
+  export type SuspiciousAttemptUpdateWithWhereUniqueWithoutUserInput = {
+    where: SuspiciousAttemptWhereUniqueInput
+    data: XOR<SuspiciousAttemptUpdateWithoutUserInput, SuspiciousAttemptUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SuspiciousAttemptUpdateManyWithWhereWithoutUserInput = {
+    where: SuspiciousAttemptScalarWhereInput
+    data: XOR<SuspiciousAttemptUpdateManyMutationInput, SuspiciousAttemptUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SuspiciousAttemptScalarWhereInput = {
+    AND?: SuspiciousAttemptScalarWhereInput | SuspiciousAttemptScalarWhereInput[]
+    OR?: SuspiciousAttemptScalarWhereInput[]
+    NOT?: SuspiciousAttemptScalarWhereInput | SuspiciousAttemptScalarWhereInput[]
+    id?: IntFilter<"SuspiciousAttempt"> | number
+    userId?: IntFilter<"SuspiciousAttempt"> | number
+    score?: IntFilter<"SuspiciousAttempt"> | number
+    level?: IntFilter<"SuspiciousAttempt"> | number
+    reason?: StringFilter<"SuspiciousAttempt"> | string
+    createdAt?: DateTimeFilter<"SuspiciousAttempt"> | Date | string
+  }
+
   export type UserCreateWithoutScoresInput = {
     username: string
     password: string
     createdAt?: Date | string
     avatar: string
     refreshToken?: string | null
+    suspiciousAttempts?: SuspiciousAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutScoresInput = {
@@ -4059,6 +5605,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avatar: string
     refreshToken?: string | null
+    suspiciousAttempts?: SuspiciousAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutScoresInput = {
@@ -4083,6 +5630,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    suspiciousAttempts?: SuspiciousAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutScoresInput = {
@@ -4092,6 +5640,61 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avatar?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    suspiciousAttempts?: SuspiciousAttemptUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutSuspiciousAttemptsInput = {
+    username: string
+    password: string
+    createdAt?: Date | string
+    avatar: string
+    refreshToken?: string | null
+    scores?: ScoreCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSuspiciousAttemptsInput = {
+    id?: number
+    username: string
+    password: string
+    createdAt?: Date | string
+    avatar: string
+    refreshToken?: string | null
+    scores?: ScoreUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSuspiciousAttemptsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSuspiciousAttemptsInput, UserUncheckedCreateWithoutSuspiciousAttemptsInput>
+  }
+
+  export type UserUpsertWithoutSuspiciousAttemptsInput = {
+    update: XOR<UserUpdateWithoutSuspiciousAttemptsInput, UserUncheckedUpdateWithoutSuspiciousAttemptsInput>
+    create: XOR<UserCreateWithoutSuspiciousAttemptsInput, UserUncheckedCreateWithoutSuspiciousAttemptsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSuspiciousAttemptsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSuspiciousAttemptsInput, UserUncheckedUpdateWithoutSuspiciousAttemptsInput>
+  }
+
+  export type UserUpdateWithoutSuspiciousAttemptsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scores?: ScoreUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSuspiciousAttemptsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scores?: ScoreUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ScoreCreateManyUserInput = {
@@ -4099,6 +5702,14 @@ export namespace Prisma {
     score: number
     level: number
     playedAt?: Date | string
+  }
+
+  export type SuspiciousAttemptCreateManyUserInput = {
+    id?: number
+    score: number
+    level: number
+    reason: string
+    createdAt?: Date | string
   }
 
   export type ScoreUpdateWithoutUserInput = {
@@ -4119,6 +5730,29 @@ export namespace Prisma {
     score?: IntFieldUpdateOperationsInput | number
     level?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuspiciousAttemptUpdateWithoutUserInput = {
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuspiciousAttemptUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuspiciousAttemptUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

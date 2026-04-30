@@ -2,9 +2,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { UserRepository } from '../repositories/user.repository';
+import { ScoreRepository } from '../repositories/score.repository';
 import { ConflictError, AuthenticationError, ValidationError } from '../errors/AppError';
 import { Config } from '../config/config';
-import { prisma } from '../db';
 import { PasswordValidator } from '../utils/password-validator';
 
 export class AuthService {
@@ -152,9 +152,7 @@ export class AuthService {
     }
 
     // Delete all user's scores first (since we couldn't add cascade delete)
-    await prisma.score.deleteMany({
-      where: { userId }
-    });
+    await ScoreRepository.deleteByUserId(userId);
 
     // Then delete user
     return UserRepository.delete(userId);

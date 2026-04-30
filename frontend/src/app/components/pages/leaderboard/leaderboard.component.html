@@ -25,7 +25,7 @@
         <span class="stat-value">{{ userStats.averageScore }}</span>
       </div>
     </div>
-    
+
     <div class="ranking" *ngIf="userRanking">
       <h3>🎯 Your Ranking Position: {{ userRanking.position }}</h3>
     </div>
@@ -33,8 +33,11 @@
 
   <!-- Leaderboard -->
   <div class="leaderboard-table">
-    <h2>🥇 Top Players</h2>
-    
+    <div class="table-header">
+      <h2>🥇 Top Players</h2>
+      <span class="total-count" *ngIf="total > 0">{{ total }} players</span>
+    </div>
+
     <div class="loading" *ngIf="loading">
       <p>⌛ Loading...</p>
     </div>
@@ -55,10 +58,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let entry of leaderboard; let i = index" 
-              [class.highlight]="i < 3">
+          <tr *ngFor="let entry of leaderboard; let i = index"
+              [class.highlight]="globalRank(i) <= 3">
             <td class="rank">
-              {{ getRankEmoji(i) }} {{ i + 1 }}
+              {{ getRankEmoji(i) }} {{ globalRank(i) }}
             </td>
             <td class="player">
               <span class="avatar">{{ entry.user.avatar }}</span>
@@ -74,6 +77,17 @@
 
     <div class="empty-state" *ngIf="!loading && !error && leaderboard.length === 0">
       <p>🎮 No results yet. Be the first!</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="!loading && totalPages > 1">
+      <button class="page-btn" (click)="prevPage()" [disabled]="page === 1">
+        ← Prev
+      </button>
+      <span class="page-info">Page {{ page }} of {{ totalPages }}</span>
+      <button class="page-btn" (click)="nextPage()" [disabled]="page === totalPages">
+        Next →
+      </button>
     </div>
   </div>
 </div>

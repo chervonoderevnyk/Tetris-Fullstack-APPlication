@@ -10,18 +10,7 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    // Check authentication status on initialization (async)
-    // Use longer timeout to avoid conflict with auth-page
-    setTimeout(() => {
-        if (!this.accessToken) { // Only if there's no token in memory
-        this.checkAuthStatus().subscribe({
-          next: () => console.log('Auth status checked on app init'),
-          error: () => console.log('No valid session found on app init')
-        });
-      }
-    }, 200);
-  }
+  constructor(private http: HttpClient) {}
 
 register(username: string, password: string, avatar: string): Observable<any> {
   return this.http.post<{ tokenA: string; user: any }>(`${this.apiUrl}/register`, 

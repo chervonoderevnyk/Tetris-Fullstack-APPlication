@@ -20,22 +20,20 @@ export class ScoreRepository {
     });
   }
 
-  static async findTopScores(limit: number = 10) {
-    return prisma.score.findMany({
-      orderBy: [
-        { score: 'desc' },
-        { playedAt: 'desc' }
-      ],
-      take: limit,
-      include: {
-        user: {
-          select: {
-            username: true,
-            avatar: true
-          }
+  static async findTopScores(page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit;
+    const [data, total] = await Promise.all([
+      prisma.score.findMany({
+        orderBy: [{ score: 'desc' }, { playedAt: 'desc' }],
+        skip,
+        take: limit,
+        include: {
+          user: { select: { username: true, avatar: true } }
         }
-      }
-    });
+      }),
+      prisma.score.count()
+    ]);
+    return { data, total };
   }
 
   static async findUserBestScores(userId: number, limit: number = 5) {
@@ -55,6 +53,10 @@ export class ScoreRepository {
         }
       }
     });
+  }
+
+  static async deleteByUserId(userId: number) {
+    return prisma.score.deleteMany({ where: { userId } });
   }
 
   static async findUserRecentScores(userId: number, limit: number = 10) {
