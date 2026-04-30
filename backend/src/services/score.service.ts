@@ -24,12 +24,21 @@ export class ScoreService {
   }
 
   // Get top results (leaderboard)
-  static async getLeaderboard(limit: number = 10) {
+  static async getLeaderboard(page: number = 1, limit: number = 10) {
+    if (page < 1) {
+      throw new ValidationError('Page must be at least 1');
+    }
     if (limit < 1 || limit > 100) {
       throw new ValidationError('Limit must be between 1 and 100');
     }
 
-    return ScoreRepository.findTopScores(limit);
+    const { data, total } = await ScoreRepository.findTopScores(page, limit);
+    return {
+      data,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit)
+    };
   }
 
   // Get user's best results

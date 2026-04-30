@@ -9,13 +9,14 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  username     String   @unique
-  password     String
-  createdAt    DateTime @default(now())
-  avatar       String
-  refreshToken String?
-  scores       Score[]
+  id                  Int                  @id @default(autoincrement())
+  username            String               @unique
+  password            String
+  createdAt           DateTime             @default(now())
+  avatar              String
+  refreshToken        String?
+  scores              Score[]
+  suspiciousAttempts  SuspiciousAttempt[]
 }
 
 model Score {
@@ -28,4 +29,17 @@ model Score {
 
   @@index([userId])
   @@index([score])
+}
+
+model SuspiciousAttempt {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  score     Int
+  level     Int
+  reason    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
 }

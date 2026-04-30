@@ -137,6 +137,15 @@ exports.Prisma.ScoreScalarFieldEnum = {
   playedAt: 'playedAt'
 };
 
+exports.Prisma.SuspiciousAttemptScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  score: 'score',
+  level: 'level',
+  reason: 'reason',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -155,7 +164,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Score: 'Score'
+  Score: 'Score',
+  SuspiciousAttempt: 'SuspiciousAttempt'
 };
 
 /**

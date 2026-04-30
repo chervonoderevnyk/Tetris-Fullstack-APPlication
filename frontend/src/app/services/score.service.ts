@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, throwError } from "rxjs";
-import { ScoreData, LeaderboardEntry, UserStats, UserRanking } from '../types';
+import { LeaderboardEntry, LeaderboardPage, UserStats, UserRanking } from '../types';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -22,8 +22,8 @@ export class ScoreService {
   }
 
   // Get leaderboard
-  getLeaderboard(limit: number = 10): Observable<LeaderboardEntry[]> {
-    return this.http.get<LeaderboardEntry[]>(`${this.apiUrl}/leaderboard?limit=${limit}`)
+  getLeaderboard(page: number = 1, limit: number = 10): Observable<LeaderboardPage> {
+    return this.http.get<LeaderboardPage>(`${this.apiUrl}/leaderboard?page=${page}&limit=${limit}`)
       .pipe(
         catchError(error => {
           console.error('Leaderboard loading error:', error);
